@@ -326,5 +326,5 @@
 </div>
 </template>
 <style>
-@import '../css/dash.css'
+@import 'hustlebidders/css/dash.css'
 </style>

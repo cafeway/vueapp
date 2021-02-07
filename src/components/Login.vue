@@ -74,7 +74,7 @@ export default {
         .signInWithEmailAndPassword(this.form.email, this.form.password)
         .then(data => {
           this.$swal('Welcome Back!')
-          this.$router.push('/')
+          this.$router.push('/Dashboard')
         })
         .catch(err => {
           this.error = err.message

@@ -13,7 +13,7 @@ const router = new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/login',
+      path: '/',
       name: 'login',
       component: Login
     },
@@ -23,7 +23,7 @@ const router = new Router({
       component: Register
     },
     {
-      path: '/',
+      path: '/Dashboard',
       name: 'Dashboard',
       component: Dashboard
     }

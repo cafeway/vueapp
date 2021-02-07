@@ -6,7 +6,7 @@
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="index.html">Home</a></li>
               <li class="breadcrumb-item"><a href="javascript:void(0)">UserProfile</a></li>
-               <li class="breadcrumb-item " aria-current="page"><a><router-link :to="{ path: 'register' }">Login</router-link></a></li>
+               <li class="breadcrumb-item " aria-current="page"><a><router-link :to="{ path: '/' }">Login</router-link></a></li>
               <li class="breadcrumb-item " aria-current="page"><a><router-link :to="{ path: 'register' }">Register</router-link></a></li>
             </ol>
           </nav>

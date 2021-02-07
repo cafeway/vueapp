@@ -28,7 +28,7 @@
         <a class="nav-link" href="#"><router-link :to="{ path: 'login' }">Login</router-link></a>
       </li>
        <li class="nav-item">
-        <a class="nav-link" href="#"><router-link :to="{ path: 'register' }">Login</router-link></a>
+        <a class="nav-link" href="#"><router-link :to="{ path: 'register' }">Register</router-link></a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">

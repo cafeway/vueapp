@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" style="padding-top:150px">
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="card">
@@ -62,11 +62,11 @@
                 <div class="col-md-6">
                   <input
                     id="phone"
-                    type="phone"
+                    type="text"
                     class="form-control"
                     name="phone"
                     required
-                    v-model="form.Phone"
+                    v-model="form.phone"
                   />
                 </div>
               </div>

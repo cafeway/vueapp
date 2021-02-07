@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" style="padding-top:150px">
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="card">
@@ -42,6 +42,9 @@
                 <div class="col-md-6 offset-md-4">
                   <button type="submit" class="btn btn-success  ">Login</button>
                 </div>
+                <div class="col-md-6 offset-md-4">
+                   <a class="nav-link" href="#"><router-link :to="{ path: 'register' }">Create a new account</router-link></a>
+                </div>
               </div>
             </form>
           </div>
@@ -70,7 +73,7 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.form.email, this.form.password)
         .then(data => {
-          this.$swal('login success')
+          this.$swal('Welcome Back!')
           this.$router.push('/')
         })
         .catch(err => {

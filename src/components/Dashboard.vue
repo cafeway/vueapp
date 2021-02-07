@@ -22,19 +22,25 @@
         <a class="nav-link" href="#">Refferals</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Whatsapp</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><router-link :to="{ path: 'login' }">Login</router-link></a>
+        <a class="nav-link" v-on:click="redirect()">Whatsapp</a>
       </li>
        <li class="nav-item">
-        <a class="nav-link" href="#"><router-link :to="{ path: 'register' }">Register</router-link></a>
+        <a class="nav-link" v-on:click="redirecttg()">Telegram</a>
+      </li>
+        <li class="nav-item">
+        <p>{{ userid }}</p>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-  </form>
+    <div class="dropdown show">
+  <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Userpanel<span class="glyphicon glyphicon-user"></span>
+  </a>
+
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <a class="dropdown-item" href="#"><router-link :to="{ path: 'login' }">Login</router-link></a>
+    <a class="dropdown-item" href="#"><router-link :to="{ path: 'register' }">Register</router-link></a>
+  </div>
+</div>
   </div>
 </nav>
 <br>
@@ -462,3 +468,19 @@ section .section-title {
     border-radius: 50%;
 }
 </style>
+<script>
+import firebase from 'firebase'
+export default {
+  created () {
+    const userid = firebase.auth().currentUser.uid
+  },
+  methods: {
+    redirect: function (event) {
+      window.location = 'https://chat.whatsapp.com/HU3wvCqjXmJ0J0OMSPndyJ'
+    },
+    redirecttg: function (event) {
+      window.location = 'https://t.me/hustlerbidders'
+    }
+  }
+}
+</script>

@@ -1,14 +1,17 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
+import Vuex from 'vuex'
 import App from './App'
-import router from './router'
 import firebase from 'firebase'
+import router from './router'
 import 'bootstrap'
 import VueSwal from 'vue-swal'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import store from './store'
 Vue.config.productionTip = false
 Vue.use(VueSwal)
+Vue.use(Vuex)
 
 /* eslint no-trailing-spaces: ["error", { "skipBlankLines": true }] */
 const configOptions = {
@@ -22,9 +25,14 @@ const configOptions = {
 }
 firebase.initializeApp(configOptions)
 /* eslint-disable no-new */
+firebase.auth().onAuthStateChanged(user => {
+  store.dispatch('fetchUser', user)
+})
+
 new Vue({
   el: '#app',
   router,
+  store,
   components: {App},
   template: '<App/>',
   methods: {

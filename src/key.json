@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "hustlebidders",
+  "private_key_id": "99760191292719f4e77550f0117aa52c6b14867b",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDddqfnOjDDufhv\npylaHyBn9EhxXTsAdYdVhf4sZVqxcI9K6k+Uf5pmADPIaS+wA3/1ZVvwH6mn3WPY\nen5vrxsVcsLfgo2ULv6S6gxl/bETlpiKAfTigc9Drt7QFTJlFXo/rPEGhadozZI2\n4DGRO5VnQK2CYeS+D2cC9TcvqxxulJ8uQHh1hNSXcaafPIZ/TBthUfcFUZp25y1q\nukDwE5s/VTSJ+S3ildIyBLJQXBLesna8CrPsEvdmnJ7u+aaMsWh6tOz/9Lnm1L32\nZI4Ybe4SIH34VFCD6F2G0q815NhnTPGpIIH7rUPgM14816/h8ppVVi5RpvVcTy2s\n1mNqd8+RAgMBAAECggEADdcXcke4glPgCPzGtJ5RPnPlltmZaUt/BR8QCdbd9Iy8\n9MToyyZQGC+rLMs3junCFHxEkxCsf+xR3AaYOhs0r2oGEBUy60PGVri8JH/Wshth\nTi8l/mWXxhJis/j+JrNxWdNBVxuxURc3S/kF+f5B9ZNlAIrlAmR4puZ7n93TA51G\nBFdvRDI13B1q28Ss0fx6mcJ8bmo2ruAWbTNLKi590tMYMPVFxSqzB0yk1tMMwXP0\nbViH679tTbHv5nAruD98hU3SDuOxLK6T1ezTQ00lZJEAYTrdIkJaqNrCE+1t/rQX\nrgkkQZOGRN/bcB8IU0E4/uZCysPmIGBW+I3WmyZPoQKBgQDuc8A+CsBshl67xvIo\nR/Oi0sVPjA4C8NwehxgCo6WafVGlvkqC4/B3gjN1CZAT7hOavQ83T4k524sm+iNv\nIZeuMOz/c37HJ7wj+ui7ncHjhynKL9cz3xsXGyl2wkKfp8Uvt7N9pqCGPwO2IV0P\nVlvQkM7KCG1hKRpsPaF0WbqSIQKBgQDtwtoqclztJnfmPjrSfwkVncyQqmc7ptNd\n+JIhJEG3z4giIbfthep76XybaCRsYra4YXoU0Q0zSmpbK0UlDwqhsad/HvHOJGWM\nNCxa60+yodjXD3mZwUcGGRDsjy6ju31HmvwvdWfh4oLpvBs8ign+Aph/jlbfgUXS\nNjvfo6FvcQKBgQDM/yoorGmdYy+SU4jf5GuqcXU72/Y3xQYYIKAdtL6sQEyvJxc7\ny+Zxd7fxSFVbLPQhtaOdM32QBhRtX+KSqdiS4nD9dDdr09dFP3JRyWBk0VC2B8cF\nSyspBCrzdDJ+u2ckjNN8lIGwp//y1mAAzYeFmNiOjAws2X9jyuBA/NsOwQKBgAoE\nQH6zTLjs+vYnPwEpOu+/MyQRGcJIl/UIiNd+mIou4xRVCVOnZaaMwqQlcgti6UHB\nUYxY9k5n3y0yGHqkNJV1T5IqcpN1sxWCCTBXY4cqDGGbFEtm+iAGpFDjA1sAhhmj\nLOau8o5wpYVFWHxncF5UK6qMC5rk7lUZ1dHpKd7xAoGBAO2Gi4sD0fKvtE87houc\nHLGdbabxrHYT1YaBppqMiwOTtS7r4UFrKIbfzIBnghq/hsRr+l8zw0/J1OE4TzQp\n27Xq+mGpZogFnaOgVyJhq3EIRxDW006awyBVR0/K8NjebEYNLpDUer6APJ2iZr1T\nWK17gzrJZpi8+HK7f4Ssfu1H\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-wom8q@hustlebidders.iam.gserviceaccount.com",
+  "client_id": "115942664119091045537",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-wom8q%40hustlebidders.iam.gserviceaccount.com"
+}

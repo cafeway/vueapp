@@ -102,9 +102,14 @@ export default {
         .auth()
         .createUserWithEmailAndPassword(this.form.email, this.form.password)
         .then(data => {
+          var user = firebase.auth().currentUser
+          user.updateProfile({
+            displayName: this.form.name,
+            phoneNumber: this.form.phone
+          })
           this.$swal('Account creation was a success')
           this.$router.push('/')
-          firebase.firestore().collection('users').add({
+          firebase.firestore().collection('users').doc(this.form.email).set({
             email: this.form.email,
             phonenumber: this.form.phone,
             username: this.form.name,

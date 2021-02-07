@@ -13,7 +13,7 @@
         <a class="nav-link" href="#">BoughtShares<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">PendingShares</a>
+        <a class="nav-link" href="#">RunningShares</a>
       </li>
       <li class="nav-item">
         <a class="nav-link " href="#">MaturedShares</a>

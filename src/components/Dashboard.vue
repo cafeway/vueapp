@@ -27,6 +27,9 @@
       <li class="nav-item">
         <a class="nav-link" href="#"><router-link :to="{ path: 'login' }">Login</router-link></a>
       </li>
+       <li class="nav-item">
+        <a class="nav-link" href="#"><router-link :to="{ path: 'register' }">Login</router-link></a>
+      </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

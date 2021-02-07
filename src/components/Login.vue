@@ -71,7 +71,7 @@ export default {
         .signInWithEmailAndPassword(this.form.email, this.form.password)
         .then(data => {
           this.$swal('login success')
-          this.$router.push('dashboard')
+          this.$router.push('/')
         })
         .catch(err => {
           this.error = err.message

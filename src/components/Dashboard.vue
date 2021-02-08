@@ -118,23 +118,12 @@
 <script>
 import { mapGetters } from 'vuex'
 import firebase from 'firebase'
+import createPersistedState from 'vuex-persistedstate'
 export default {
   data () {
     return {
       phoneNumber: ''
     }
-  },
-  created () {
-    var db = firebase.firestore()
-    var user = firebase.auth().currentUser
-    db.collection('users')
-      .doc(user.email)
-      .get()
-      .then(snapshot => {
-        const document = snapshot.data()
-        console.log(document.phonenumber)
-        this.phoneNumber = document.phonenumber
-      })
   },
   methods: {
     redirect: function (event) {

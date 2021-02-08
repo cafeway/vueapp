@@ -26,6 +26,7 @@
     "vuefire": "^2.2.5",
     "vuex": "^3.6.2",
     "vuex-easy-firestore": "^1.36.0",
+    "vuex-persistedstate": "^4.0.0-beta.3",
     "vuexfire": "^3.2.5"
   },
   "devDependencies": {

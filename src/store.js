@@ -1,11 +1,17 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { vuexfireMutations, firestoreAction } from 'vuexfire'
+import createPersistedState from 'vuex-persistedstate'
 import firebase from 'firebase'
 Vue.use(Vuex)
 export default new Vuex.Store({
+  plugins: [createPersistedState()],
   state: {
-    userdata: [],
+    userinfo: {
+      phonenumber: '',
+      balance: '',
+      maturedshared: ''
+    },
     user: {
       loggedIn: false,
       data: null
@@ -14,6 +20,9 @@ export default new Vuex.Store({
   getters: {
     user (state) {
       return state.user
+    }
+    userinfo (state) {
+      return state.userinfo
     }
   },
   mutations: {
@@ -37,8 +46,8 @@ export default new Vuex.Store({
         commit('SET_USER', null)
       }
     },
-    bindUserref: firestoreAction(context => {
-      return context.bindUserref('userdata', firebase.firestore().collection('users'))
-    })
+    bindCurrentUser: firestoreAction(context => {
+      return context.bindUserref('userinfo', firebase.firestore().collection('users'),doc(firebase.auth().currentUser.email))
+    }),
   }
 })

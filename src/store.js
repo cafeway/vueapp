@@ -7,11 +7,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   plugins: [createPersistedState()],
   state: {
-    userinfo: {
-      phonenumber: '',
-      balance: '',
-      maturedshared: ''
-    },
+    userinfo: [],
     user: {
       loggedIn: false,
       data: null
@@ -20,7 +16,7 @@ export default new Vuex.Store({
   getters: {
     user (state) {
       return state.user
-    }
+    },
     userinfo (state) {
       return state.userinfo
     }
@@ -46,8 +42,10 @@ export default new Vuex.Store({
         commit('SET_USER', null)
       }
     },
-    bindCurrentUser: firestoreAction(context => {
-      return context.bindUserref('userinfo', firebase.firestore().collection('users'),doc(firebase.auth().currentUser.email))
-    }),
+    bindUser: firestoreAction(({bindFirestoreRef}) => {
+      return bindFirestoreRef('userinfo',
+        firebase.firestore().collection('users').doc(firebase.auth().currentUser.email)
+      )
+    })
   }
 })

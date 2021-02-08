@@ -59,6 +59,14 @@
                     </div>
                   </div>
                   <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Balance</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{balance}}
+                    </div>
+                  </div>
                    </div>
               </div>
               <div class="row gutters-sm">
@@ -118,12 +126,25 @@
 <script>
 import { mapGetters } from 'vuex'
 import firebase from 'firebase'
-import createPersistedState from 'vuex-persistedstate'
 export default {
   data () {
     return {
-      phoneNumber: ''
+      phoneNumber: '',
+      email: '',
+      balance: 0,
+      maturedShares: ''
     }
+  },
+  updated: function () {
+    console.log('updated')
+    var db = firebase.firestore()
+    var user = firebase.auth().currentUser
+    db.collection('users').doc(user.email).get().then(snapshot => {
+      const doc = snapshot.data()
+      console.log(doc)
+      this.phoneNumber = doc.phonenumber
+      this.balance = doc.balance
+    })
   },
   methods: {
     redirect: function (event) {

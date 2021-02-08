@@ -34,10 +34,5 @@ new Vue({
   router,
   store,
   components: {App},
-  template: '<App/>',
-  methods: {
-    loginrdr: function () {
-      this.$router.push('login')
-    }
-  }
+  template: '<App/>'
 })

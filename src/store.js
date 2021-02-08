@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { vuexfireMutations } from 'vuexfire'
+import { vuexfireMutations, firestoreAction } from 'vuexfire'
+import firebase from 'firebase'
 Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
@@ -35,6 +36,9 @@ export default new Vuex.Store({
       } else {
         commit('SET_USER', null)
       }
-    }
+    },
+    bindUserref: firestoreAction(context => {
+      return context.bindUserref('userdata', firebase.firestore().collection('users'))
+    })
   }
 })

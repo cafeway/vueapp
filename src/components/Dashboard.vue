@@ -127,12 +127,13 @@ export default {
   created () {
     var db = firebase.firestore()
     var user = firebase.auth().currentUser
-    db.collection('documents')
+    db.collection('users')
       .doc(user.email)
       .get()
       .then(snapshot => {
         const document = snapshot.data()
-        console.log(document)
+        console.log(document.phonenumber)
+        this.phoneNumber = document.phonenumber
       })
   },
   methods: {

@@ -162,16 +162,16 @@
 <script>
 import { mapGetters } from 'vuex'
 import firebase from 'firebase'
-const Mpesa = require('mpesa-api').Mpesa
-const credentials = {
-  clientKey: 'PzYKGrQDH8C75CkzOhn9QEUwNVuKAmpI',
-  clientSecret: 'h8mZA8Z5zdjgCYge',
-  initiatorPassword: 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919',
-  securityCredential: 'W0lMwNhtwOU3vBnHrrNJUYzr6tKSuIOCZTCCeE4wQ/OE0iTvXoY8Al/EwhHqydzvDh/V7MYXMQ+NFoxbeTTIF4BBW8MnVi6W3TyTUBi9k1Ip9YO5r5Mnjf9PuThgchppO60CgBbCNP0wSfEsmrgqD0L4SIAMHeWQX6DpR7g1RuPQCrmmhU5OTA1fa0dvk3KPb1b8/Fzgh7PscGQV8V2AyDeA3HkL/AHKqUaC3tS7l99AivAoqpeT7N3RtgIiDMiKFa5APPQGYvaOqy1QjduYz9auCneMQOEoQHOoh5yAnj1RmUXjOoiPjtYZF9jk0Us/FseKxbHJwft9BTyzcwu1Mg==',
-  certificatePath: 'keys/example.cert'
-}
-const environment = 'production'
-const mpesa = new Mpesa(credentials, environment)
+// const Mpesa = require('mpesa-api').Mpesa
+// const credentials = {
+//   clientKey: 'PzYKGrQDH8C75CkzOhn9QEUwNVuKAmpI',
+//   clientSecret: 'h8mZA8Z5zdjgCYge',
+//   initiatorPassword: 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919',
+//   securityCredential: 'W0lMwNhtwOU3vBnHrrNJUYzr6tKSuIOCZTCCeE4wQ/OE0iTvXoY8Al/EwhHqydzvDh/V7MYXMQ+NFoxbeTTIF4BBW8MnVi6W3TyTUBi9k1Ip9YO5r5Mnjf9PuThgchppO60CgBbCNP0wSfEsmrgqD0L4SIAMHeWQX6DpR7g1RuPQCrmmhU5OTA1fa0dvk3KPb1b8/Fzgh7PscGQV8V2AyDeA3HkL/AHKqUaC3tS7l99AivAoqpeT7N3RtgIiDMiKFa5APPQGYvaOqy1QjduYz9auCneMQOEoQHOoh5yAnj1RmUXjOoiPjtYZF9jk0Us/FseKxbHJwft9BTyzcwu1Mg==',
+//   certificatePath: 'keys/example.cert'
+// }
+// const environment = 'production'
+// const mpesa = new Mpesa(credentials, environment)
 export default {
   data () {
     return {
@@ -215,7 +215,7 @@ export default {
       //   .catch((error) => {
       //     console.error(error)
       //   })
-      alert("under maintainance")
+      alert('under maintainance')
     },
     redirect: function (event) {
       window.location = 'https://chat.whatsapp.com/HU3wvCqjXmJ0J0OMSPndyJ'

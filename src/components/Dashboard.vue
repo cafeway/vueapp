@@ -19,9 +19,6 @@
                     <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
                     <div class="mt-3">
                       <h4>{{user.data.displayName}}</h4>
-                      <p class="text-secondary mb-1">{{user.data.email}}</p>
-                      <p class="text-muted font-size-sm"></p>
-                      <!-- Button trigger modal -->
                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
                          Invite Friends
                       </button>
@@ -37,7 +34,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p id = "link" class=" text text-suceess">{{invitelink}}</p>
+        <p id = "link" class=" text text-success">{{invitelink}}</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -52,7 +49,17 @@
               </div>
               <div class="card mt-3">
               <div class="card-body">
-                      <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">buy shares</i></h6>
+                      <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Deposit</i></h6>
+                      <form>
+                        <div class="form-group">
+                          <input type="amount" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter amount e.g ksh 500">
+                          <small id="emailHelp" class="form-text text-muted">Note transaction fees inclusive</small>
+                        </div>
+                        <div class="form-group">
+                          <input type="email" class="form-control" id="till" aria-describedby="emailHelp" placeholder="till number : 5674451 ">
+                        </div>
+                        <button type="submit" class="btn btn-success">Lipa na mpesa</button>
+                      </form>
                     </div>
               </div>
             </div>
@@ -72,7 +79,7 @@
                     <div class="col-sm-3">
                       <h6 class="mb-0">Email</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">
+                    <div class="col-sm-9 text-success">
                     {{user.data.email}}
                     </div>
                   </div>
@@ -81,7 +88,7 @@
                     <div class="col-sm-3">
                       <h6 class="mb-0">Phone</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">
+                    <div class="col-sm-9 text-danger">
                       {{phoneNumber}}
                     </div>
                   </div>
@@ -90,7 +97,7 @@
                     <div class="col-sm-3">
                       <h6 class="mb-0">Balance</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">
+                    <div class="col-sm-9 text-info">
                       {{balance}}
                     </div>
                   </div>
@@ -153,6 +160,16 @@
 <script>
 import { mapGetters } from 'vuex'
 import firebase from 'firebase'
+// import { Mpesa } from 'mpesa-api'
+// const credentials = {
+//   clientKey: 'PzYKGrQDH8C75CkzOhn9QEUwNVuKAmpI',
+//   clientSecret: 'h8mZA8Z5zdjgCYge',
+//   initiatorPassword: 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919',
+//   securityCredential: 'W0lMwNhtwOU3vBnHrrNJUYzr6tKSuIOCZTCCeE4wQ/OE0iTvXoY8Al/EwhHqydzvDh/V7MYXMQ+NFoxbeTTIF4BBW8MnVi6W3TyTUBi9k1Ip9YO5r5Mnjf9PuThgchppO60CgBbCNP0wSfEsmrgqD0L4SIAMHeWQX6DpR7g1RuPQCrmmhU5OTA1fa0dvk3KPb1b8/Fzgh7PscGQV8V2AyDeA3HkL/AHKqUaC3tS7l99AivAoqpeT7N3RtgIiDMiKFa5APPQGYvaOqy1QjduYz9auCneMQOEoQHOoh5yAnj1RmUXjOoiPjtYZF9jk0Us/FseKxbHJwft9BTyzcwu1Mg==',
+//   certificatePath: 'keys/example.cert'
+// }
+// const environment = 'production'
+
 export default {
   data () {
     return {
@@ -206,6 +223,9 @@ export default {
       console.log(queryData.email)
       this.invitelink = finalURL
     }
+  },
+  verify () {
+    alert('verify email')
   },
   computed: {
     ...mapGetters({

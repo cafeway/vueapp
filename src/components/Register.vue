@@ -122,11 +122,12 @@ export default {
             displayName: this.form.name,
             phoneNumber: this.form.phone
           })
+          user.sendEmailVerification()
           const url = require('url')
           let urlObject = url.parse(this.form.refferalcode, true)
           let queryData = urlObject.query
           let referee = queryData.email
-          this.$swal('Account creation was a success')
+          this.$swal('Account created successfully please check your email to verify your account....')
           this.$router.push('/')
           firebase.firestore().collection('users').doc(this.form.email).set({
             email: this.form.email,
@@ -137,7 +138,7 @@ export default {
             balance: 0
           })
           firebase.firestore().collection('users').doc(referee).collection('invitees').doc(this.form.email).set({
-            bidamount: 0
+            username: this.form.name
           })
         })
         .catch(err => {

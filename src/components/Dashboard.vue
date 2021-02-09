@@ -53,8 +53,7 @@
               <div class="card mt-3">
               <div class="card-body">
                       <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">buy shares</i></h6>
-                      
-                    </div>   
+                    </div>
               </div>
             </div>
             <div class="col-md-8">

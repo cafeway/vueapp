@@ -109,7 +109,7 @@
                 <div class="col-sm-6 mb-3">
                   <div class="card h-100">
                     <div class="card-body">
-                      <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">buy shares</i></h6>
+                      <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">buy shares</i>{{availableshares}}</h6>
                       <form>
                          <div class="mb-3">
     <input type="email" class="form-control" id="days"  aria-describedby="emailHelp" placeholder="number of days to the bids maturity">
@@ -180,7 +180,8 @@ export default {
       balance: 0,
       maturedShares: '',
       invitelink: '',
-      previewLink: ''
+      previewLink: '',
+      availableshares: 0
     }
   },
   updated: function () {
@@ -200,20 +201,21 @@ export default {
   },
   methods: {
     Pay: function (event) {
-      mpesa.b2c({
-        Initiator: 'Initiator Name',
-        Amount: 1000 /* 1000 is an example amount */,
-        PartyA: 'Party A',
-        PartyB: 'Party B',
-        QueueTimeOutURL: 'Queue Timeout URL',
-        ResultURL: 'Result URL'
-      })
-        .then((response) => {
-          console.log(response)
-        })
-        .catch((error) => {
-          console.error(error)
-        })
+      // mpesa.b2c({
+      //   Initiator: 'Initiator Name',
+      //   Amount: 1000 /* 1000 is an example amount */,
+      //   PartyA: 'Party A',
+      //   PartyB: 'Party B',
+      //   QueueTimeOutURL: 'Queue Timeout URL',
+      //   ResultURL: 'Result URL'
+      // })
+      //   .then((response) => {
+      //     console.log(response)
+      //   })
+      //   .catch((error) => {
+      //     console.error(error)
+      //   })
+      alert("under maintainance")
     },
     redirect: function (event) {
       window.location = 'https://chat.whatsapp.com/HU3wvCqjXmJ0J0OMSPndyJ'

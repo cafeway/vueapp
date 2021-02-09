@@ -58,7 +58,9 @@
                         <div class="form-group">
                           <input type="email" class="form-control" id="till" aria-describedby="emailHelp" placeholder="till number : 5674451 ">
                         </div>
-                        <button type="submit" class="btn btn-success">Lipa na mpesa</button>
+                        <div class="form-group">
+                        <button type="button" class="btn btn-success" v-on:click="Pay" >Lipa na Mpesa</button>
+                      </div>
                       </form>
                     </div>
               </div>
@@ -160,16 +162,16 @@
 <script>
 import { mapGetters } from 'vuex'
 import firebase from 'firebase'
-// import { Mpesa } from 'mpesa-api'
-// const credentials = {
-//   clientKey: 'PzYKGrQDH8C75CkzOhn9QEUwNVuKAmpI',
-//   clientSecret: 'h8mZA8Z5zdjgCYge',
-//   initiatorPassword: 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919',
-//   securityCredential: 'W0lMwNhtwOU3vBnHrrNJUYzr6tKSuIOCZTCCeE4wQ/OE0iTvXoY8Al/EwhHqydzvDh/V7MYXMQ+NFoxbeTTIF4BBW8MnVi6W3TyTUBi9k1Ip9YO5r5Mnjf9PuThgchppO60CgBbCNP0wSfEsmrgqD0L4SIAMHeWQX6DpR7g1RuPQCrmmhU5OTA1fa0dvk3KPb1b8/Fzgh7PscGQV8V2AyDeA3HkL/AHKqUaC3tS7l99AivAoqpeT7N3RtgIiDMiKFa5APPQGYvaOqy1QjduYz9auCneMQOEoQHOoh5yAnj1RmUXjOoiPjtYZF9jk0Us/FseKxbHJwft9BTyzcwu1Mg==',
-//   certificatePath: 'keys/example.cert'
-// }
-// const environment = 'production'
-
+const Mpesa = require('mpesa-api').Mpesa
+const credentials = {
+  clientKey: 'PzYKGrQDH8C75CkzOhn9QEUwNVuKAmpI',
+  clientSecret: 'h8mZA8Z5zdjgCYge',
+  initiatorPassword: 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919',
+  securityCredential: 'W0lMwNhtwOU3vBnHrrNJUYzr6tKSuIOCZTCCeE4wQ/OE0iTvXoY8Al/EwhHqydzvDh/V7MYXMQ+NFoxbeTTIF4BBW8MnVi6W3TyTUBi9k1Ip9YO5r5Mnjf9PuThgchppO60CgBbCNP0wSfEsmrgqD0L4SIAMHeWQX6DpR7g1RuPQCrmmhU5OTA1fa0dvk3KPb1b8/Fzgh7PscGQV8V2AyDeA3HkL/AHKqUaC3tS7l99AivAoqpeT7N3RtgIiDMiKFa5APPQGYvaOqy1QjduYz9auCneMQOEoQHOoh5yAnj1RmUXjOoiPjtYZF9jk0Us/FseKxbHJwft9BTyzcwu1Mg==',
+  certificatePath: 'keys/example.cert'
+}
+const environment = 'production'
+const mpesa = new Mpesa(credentials, environment)
 export default {
   data () {
     return {
@@ -197,6 +199,22 @@ export default {
     // })
   },
   methods: {
+    Pay: function (event) {
+      mpesa.b2c({
+        Initiator: 'Initiator Name',
+        Amount: 1000 /* 1000 is an example amount */,
+        PartyA: 'Party A',
+        PartyB: 'Party B',
+        QueueTimeOutURL: 'Queue Timeout URL',
+        ResultURL: 'Result URL'
+      })
+        .then((response) => {
+          console.log(response)
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+    },
     redirect: function (event) {
       window.location = 'https://chat.whatsapp.com/HU3wvCqjXmJ0J0OMSPndyJ'
     },
@@ -224,13 +242,26 @@ export default {
       this.invitelink = finalURL
     }
   },
-  verify () {
-    alert('verify email')
-  },
   computed: {
     ...mapGetters({
       user: 'user'
     })
+  },
+  Pay: function (event) {
+    mpesa.b2c({
+      Initiator: 'Initiator Name',
+      Amount: 1000 /* 1000 is an example amount */,
+      PartyA: 'Party A',
+      PartyB: 'Party B',
+      QueueTimeOutURL: 'Queue Timeout URL',
+      ResultURL: 'Result URL'
+    })
+      .then((response) => {
+        console.log(response)
+      })
+      .catch((error) => {
+        console.error(error)
+      })
   }
 }
 </script>

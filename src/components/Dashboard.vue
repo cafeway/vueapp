@@ -246,22 +246,6 @@ export default {
     ...mapGetters({
       user: 'user'
     })
-  },
-  Pay: function (event) {
-    mpesa.b2c({
-      Initiator: 'Initiator Name',
-      Amount: 1000 /* 1000 is an example amount */,
-      PartyA: 'Party A',
-      PartyB: 'Party B',
-      QueueTimeOutURL: 'Queue Timeout URL',
-      ResultURL: 'Result URL'
-    })
-      .then((response) => {
-        console.log(response)
-      })
-      .catch((error) => {
-        console.error(error)
-      })
   }
 }
 </script>

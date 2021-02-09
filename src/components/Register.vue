@@ -70,6 +70,20 @@
                   />
                 </div>
               </div>
+              <div class="form-group row">
+                <label for="phone" class="col-md-4 col-form-label text-md-right">RefferalCode</label>
+
+                <div class="col-md-6">
+                  <input
+                    id="refferalcode"
+                    type="text"
+                    class="form-control"
+                    name="phone"
+                    required
+                    v-model="form.refferalcode"
+                  />
+                </div>
+              </div>
               <div class="form-group row mb-0">
                 <div class="col-md-8 offset-md-4">
                   <button type="submit" class="btn btn-primary">Register</button>
@@ -91,7 +105,8 @@ export default {
         email: '',
         password: '',
         phone: '',
-        name: ''
+        name: '',
+        refferalcode: ''
       },
       error: null
     }
@@ -107,6 +122,10 @@ export default {
             displayName: this.form.name,
             phoneNumber: this.form.phone
           })
+          const url = require('url')
+          let urlObject = url.parse(this.form.refferalcode, true)
+          let queryData = urlObject.query
+          let referee = queryData.email
           this.$swal('Account creation was a success')
           this.$router.push('/')
           firebase.firestore().collection('users').doc(this.form.email).set({
@@ -116,6 +135,9 @@ export default {
             shares: 0,
             MaturedShares: 0,
             balance: 0
+          })
+          firebase.firestore().collection('users').doc(referee).collection('invitees').doc(this.form.email).set({
+            bidamount: 0
           })
         })
         .catch(err => {

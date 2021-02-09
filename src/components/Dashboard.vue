@@ -21,12 +21,40 @@
                       <h4>{{user.data.displayName}}</h4>
                       <p class="text-secondary mb-1">{{user.data.email}}</p>
                       <p class="text-muted font-size-sm"></p>
-                      <button class="btn btn-outline-primary">Invite Friends</button>
+                      <!-- Button trigger modal -->
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                         Invite Friends
+                      </button>
+
+                      <!-- Modal -->
+                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                   <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                   <div class="modal-header">
+             <h5 class="modal-title" id="exampleModalLongTitle">Share this link for rewards</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p id = "link" class=" text text-suceess">{{invitelink}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" v-on:click="genaratelink()" >Generate link</button>
+      </div>
+    </div>
+  </div>
+</div>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="card mt-3">
+              <div class="card-body">
+                      <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">buy shares</i></h6>
+                      
+                    </div>   
               </div>
             </div>
             <div class="col-md-8">
@@ -132,7 +160,9 @@ export default {
       phoneNumber: '',
       email: '',
       balance: 0,
-      maturedShares: ''
+      maturedShares: '',
+      invitelink: '',
+      previewLink: ''
     }
   },
   updated: function () {
@@ -141,10 +171,14 @@ export default {
     var user = firebase.auth().currentUser
     db.collection('users').doc(user.email).get().then(snapshot => {
       const doc = snapshot.data()
-      console.log(doc)
       this.phoneNumber = doc.phonenumber
       this.balance = doc.balance
     })
+    // db.collection('users').doc(user.email).get().then(snapshot => {
+    //   const doc = snapshot.data()
+    //   this.phoneNumber = doc.phonenumber
+    //   this.balance = doc.balance
+    // })
   },
   methods: {
     redirect: function (event) {
@@ -157,6 +191,21 @@ export default {
       if (firebase.auth().signOut()) {
         window.location = '/'
       }
+    },
+    genaratelink () {
+      var urlgenerator = require('urlgenerator')
+      var createURLwithParameters = urlgenerator.createURLwithParameters
+      var baseURL = 'https://hustlerbidders.netlify.com/refferals'
+      var useremail = firebase.auth().currentUser.email
+      var parameters = {'email': useremail}
+      var finalURL = createURLwithParameters(baseURL, parameters)
+      console.log('final URL is ', finalURL)
+      const url = require('url')
+      let urlObject = url.parse(finalURL, true)
+      console.log(urlObject.host)
+      let queryData = urlObject.query
+      console.log(queryData.email)
+      this.invitelink = finalURL
     }
   },
   computed: {

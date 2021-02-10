@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Login from '../components/Login'
 import Register from '../components/Register'
 import Dashboard from '../components/Dashboard'
+import transactions from '../components/transactions.vue'
 
 Vue.use(Router)
 Vue.use(VueSwal)
@@ -26,6 +27,11 @@ const router = new Router({
       path: '/Dashboard',
       name: 'Dashboard',
       component: Dashboard
+    },
+    {
+      path: '/transactions',
+      name: 'transactions',
+      component: transactions
     }
   ]
 })

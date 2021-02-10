@@ -130,6 +130,7 @@ export default {
           this.$swal('Account created successfully please check your email to verify your account....')
           this.$router.push('/')
           firebase.firestore().collection('users').doc(this.form.email).set({
+            uid: firebase.auth().currentUser.uid,
             email: this.form.email,
             phonenumber: this.form.phone,
             username: this.form.name,
@@ -138,7 +139,8 @@ export default {
             balance: 0
           })
           firebase.firestore().collection('users').doc(referee).collection('invitees').doc(this.form.email).set({
-            username: this.form.name
+            username: this.form.name,
+            email: this.form.email
           })
         })
         .catch(err => {
@@ -148,3 +150,9 @@ export default {
   }
 }
 </script>
+<style>
+body{
+ background-image: url("../assets/crypto.jpg");
+}
+
+</style>

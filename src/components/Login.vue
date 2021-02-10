@@ -1,12 +1,20 @@
 <template>
-  <div class="container" style="padding-top:150px">
+  <div class="container-fluid" style="padding-top:150px; backgroundImage: { url('../assets/btc.jpg')}">
     <div class="row justify-content-center">
-      <div class="col-md-8">
+      <div class="col-md-6" style="background-color: transparent">
+       <v-row justify="space-around">
+    <v-icon
+      large
+      color="green darken-2"
+    >
+      mdi-domain
+    </v-icon>
+       </v-row>
         <div class="card">
           <div class="card-header">Welcome back</div>
           <div class="card-body">
             <div v-if="error" class="alert alert-danger">{{error}}</div>
-            <form action="#" @submit.prevent="submit">
+            <form action="#" @submit.prevent="submit" >
               <div class="form-group row">
                 <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
 
@@ -43,7 +51,7 @@
                   <button type="submit" class="btn btn-success  ">Login</button>
                 </div>
                 <div class="col-md-6 offset-md-4">
-                   <a class="nav-link" href="#"><router-link :to="{ path: 'register' }">Create a new account</router-link></a>
+                   <a class="nav-link link-info" href="/register">Create a new account</a>
                 </div>
               </div>
             </form>
@@ -83,3 +91,9 @@ export default {
   }
 }
 </script>
+<style>
+body {
+  background-image: url("../assets/crypto.jpg");
+
+}
+</style>

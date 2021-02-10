@@ -103,54 +103,76 @@
                       {{balance}}
                     </div>
                   </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Your Shares</h6>
+                    </div>
+                    <div class="col-sm-9 text-warning">
+                      {{shares}}
+                    </div>
+                  </div>
                    </div>
               </div>
               <div class="row gutters-sm">
                 <div class="col-sm-6 mb-3">
                   <div class="card h-100">
                     <div class="card-body">
-                      <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">buy shares</i>{{availableshares}}</h6>
+                      <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">available shares</i>{{availableshares}}</h6>
                       <form>
-                         <div class="mb-3">
-    <input type="email" class="form-control" id="days"  aria-describedby="emailHelp" placeholder="number of days to the bids maturity">
-  </div>
-  <hr>
-  <div class="mb-3">
-    <input type="password" class="form-control" id="amount" placeholder="enter your bid amount">
-  </div>
-  <div class="mb-3 form-check">
-
-  </div>
-  <button type="submit" class="btn btn-success">Buy</button>
-</form>
+                      <div class="mb-3">
+                        <input type="number" name="days" required="required"  v-model="form.days" class="form-control" id="days"  aria-describedby="emailHelp" placeholder="number of days to the bids maturity">
+                      </div>
+                      <hr>
+                      <div class="mb-3">
+                      <input type="number" class="form-control" id="amount" placeholder="enter your bid amount" required="required" name="amount" v-model="form.amount">
+                      </div>
+                     <div class="mb-3 form-check">
+                     </div>
+                     <div class="form-group">
+                     <button type="button" class="btn btn-success" v-on:click="submit()">Buy</button>
+                     </div>
+                   </form>
                     </div>
                   </div>
                 </div>
                 <div class="col-sm-6 mb-3">
                   <div class="card h-100">
                     <div class="card-body">
-                      <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>Project Status</h6>
-                      <small>Web Design</small>
-                      <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <small>Website Markup</small>
-                      <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <small>One Page</small>
-                      <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <small>Mobile Template</small>
-                      <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <small>Backend API</small>
-                      <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </div>
+                      <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">YourData</i> and current Status</h6>
+                      <ul class="list-group">
+                      <li class="list-group-item list-group-item-success"> Refferal Money ksh:
+                         <span class="badge">{{refferalMoney}}</span>  </li>
+                       <li class="list-group-item list-group-item-info"><a href="">PendingShares</a></li>
+                      <li class="list-group-item list-group-item-warning"><a href="">Matured Shares</a></li>
+                      <li class="list-group-item list-group-item-danger"><a data-toggle="modal" data-target="#exampleModal">Sell Shares</a></li>
+                  </ul>
+            </div>
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Sell Your Shares</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form>
+  <div class="row">
+    <div class="col">
+      <input type="" id="sharesOnSale" class="form-control" placeholder="amount you wish to sell">
+    </div>
+  </div>
+</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" >Sell</button>
+      </div>
+    </div>
+  </div>
+</div>
                   </div>
                 </div>
               </div>
@@ -181,7 +203,15 @@ export default {
       maturedShares: '',
       invitelink: '',
       previewLink: '',
-      availableshares: 0
+      availableshares: 0,
+      shares: 0,
+      refferalMoney: 0,
+      date: '',
+      form: {
+        amount: 0,
+        days: 0,
+        sharesOnSale: 0
+      }
     }
   },
   updated: function () {
@@ -192,14 +222,37 @@ export default {
       const doc = snapshot.data()
       this.phoneNumber = doc.phonenumber
       this.balance = doc.balance
+      this.shares = doc.shares
     })
-    // db.collection('users').doc(user.email).get().then(snapshot => {
-    //   const doc = snapshot.data()
-    //   this.phoneNumber = doc.phonenumber
-    //   this.balance = doc.balance
-    // })
+    db.collection('shares').doc('available').get().then(snapshot => {
+      let data = snapshot.data()
+      this.availableshares = data.total
+    })
+    db.collection('users').doc(user.email).collection('invitees').get().then(snapshot => {
+      this.refferalMoney = snapshot.size * 20
+    })
   },
   methods: {
+    submit () {
+      var db = firebase.firestore().collection('shares').doc('available')
+      db.get().then(snapshot => {
+        var data = snapshot.data()
+        if (data.total >= 0) {
+          let residue = data.total - this.form.amount
+          db.collection('transaction').doc(firebase.auth().currentUser.uid).set({
+            tob: Date(),
+            buyerid: firebase.auth().currentUser.uid,
+            sellerid: '',
+            amount: this.form.amount
+          })
+          console.log(residue)
+          db.update({total: residue})
+          this.$router.push('/transaction')
+        } else {
+          this.$swal('The shares have run out....try again later')
+        }
+      })
+    },
     Pay: function (event) {
       // mpesa.b2c({
       //   Initiator: 'Initiator Name',

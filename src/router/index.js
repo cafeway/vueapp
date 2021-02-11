@@ -4,7 +4,7 @@ import Router from 'vue-router'
 import Login from '../components/Login'
 import Register from '../components/Register'
 import Dashboard from '../components/Dashboard'
-import transactions from '../components/transactions.vue'
+import DialogLoader from '../components/DialogLoader'
 
 Vue.use(Router)
 Vue.use(VueSwal)
@@ -29,9 +29,9 @@ const router = new Router({
       component: Dashboard
     },
     {
-      path: '/transactions',
-      name: 'transactions',
-      component: transactions
+      path: '/DialogLoader',
+      name: 'DialogLoader',
+      component: DialogLoader
     }
   ]
 })

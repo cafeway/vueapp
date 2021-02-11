@@ -239,15 +239,16 @@ export default {
         var data = snapshot.data()
         if (data.total >= 0) {
           let residue = data.total - this.form.amount
-          db.collection('transaction').doc(firebase.auth().currentUser.uid).set({
-            tob: Date(),
+          db.collection('share').doc(firebase.auth().currentUser.uid).set({
+            time: Date(),
             buyerid: firebase.auth().currentUser.uid,
             sellerid: '',
             amount: this.form.amount
           })
           console.log(residue)
           db.update({total: residue})
-          this.$router.push('/transaction')
+          this.$swal('you bought ' + '  ' + this.form.amount + '  ' + ' Shares please pair to activate')
+          this.$router.push('/DialogLoader')
         } else {
           this.$swal('The shares have run out....try again later')
         }

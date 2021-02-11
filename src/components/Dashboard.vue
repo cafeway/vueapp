@@ -239,7 +239,7 @@ export default {
         var data = snapshot.data()
         if (data.total >= 0) {
           let residue = data.total - this.form.amount
-          db.collection('share').doc(firebase.auth().currentUser.uid).set({
+          db.collection('share').doc(Date()).set({
             time: Date(),
             buyerid: firebase.auth().currentUser.uid,
             sellerid: '',

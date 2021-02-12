@@ -5,6 +5,7 @@ import Login from '../components/Login'
 import Register from '../components/Register'
 import Dashboard from '../components/Dashboard'
 import DialogLoader from '../components/DialogLoader'
+import resetpassword from '../components/resetpassword'
 
 Vue.use(Router)
 Vue.use(VueSwal)
@@ -32,6 +33,11 @@ const router = new Router({
       path: '/DialogLoader',
       name: 'DialogLoader',
       component: DialogLoader
+    },
+    {
+      path: '/resetpassword',
+      name: 'resetpassword',
+      component: resetpassword
     }
   ]
 })

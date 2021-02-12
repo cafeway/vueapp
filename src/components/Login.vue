@@ -11,12 +11,12 @@
     </v-icon>
        </v-row>
         <div class="card">
-          <div class="card-header">Welcome back</div>
+          <div class="card-header"><b>Welcome back</b></div>
           <div class="card-body">
             <div v-if="error" class="alert alert-danger">{{error}}</div>
             <form action="#" @submit.prevent="submit" >
               <div class="form-group row">
-                <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
+                <label for="email" class="col-md-4 col-form-label text-md-right"><b>Email</b></label>
 
                 <div class="col-md-6">
                   <input
@@ -33,7 +33,7 @@
               </div>
 
               <div class="form-group row">
-                <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+                <label for="password" class="col-md-4 col-form-label text-md-right"><b>Password</b></label>
 
                 <div class="col-md-6">
                   <input
@@ -49,9 +49,9 @@
               <div class="form-group row mb-0">
                 <div class="col-md-6 offset-md-4">
                   <button type="submit" class="btn btn-success  ">Login</button>
-                </div>
-                <div class="col-md-6 offset-md-4">
-                   <a class="nav-link link-info" href="/register">Create a new account</a>
+                   <a class="text-danger" href="/resetpassword"><b>reset password</b></a>
+                   <hr>
+                   <a class="text-succes" href="/register"><b>Create an account for free</b></a>
                 </div>
               </div>
             </form>

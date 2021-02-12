@@ -63,18 +63,18 @@ export default {
     submit () {
       var users = []
       firebase.firestore().collection('users').get().then(snapshot => {
-          snapshot.forEach(doc => {
-              users.push(doc.id)
-              if (users.includes(this.form.email)) {
-                  firebase.auth().sendPasswordResetEmail(this.form.email)
-                  this.$swal('Check your inbox for the reset link')
-              } else {
-                  this.$swal('This email doesnt exists!')
-              }
-          })
+        snapshot.forEach(doc => {
+          users.push(doc.id)
+          if (users.includes(this.form.email)) {
+            firebase.auth().sendPasswordResetEmail(this.form.email)
+            this.$swal('Check your inbox for the reset link')
+          } else {
+            this.$swal('This email doesnt exists!')
+          }
+        })
       })
-      }
     }
+  }
 }
 </script>
 <style>

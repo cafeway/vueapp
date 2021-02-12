@@ -49,7 +49,7 @@
               </div>
               <div class="card mt-3">
               <div class="card-body">
-                      <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Deposit</i></h6>
+                      <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Buy From Us</i></h6>
                       <form>
                         <div class="form-group">
                           <input type="amount" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter amount e.g ksh 500">

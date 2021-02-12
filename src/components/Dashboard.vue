@@ -143,8 +143,8 @@
                       <ul class="list-group">
                       <li class="list-group-item list-group-item-success"> Refferal Money ksh:
                          <span class="badge">{{refferalMoney}}</span>  </li>
-                       <li class="list-group-item list-group-item-info"><a href="">PendingShares</a></li>
-                      <li class="list-group-item list-group-item-warning"><a href="">Matured Shares</a></li>
+                       <li class="list-group-item list-group-item-info"><a href="/sharesdash">PendingShares</a></li>
+                      <li class="list-group-item list-group-item-warning"><a href="/sharesdash">Matured Shares</a></li>
                       <li class="list-group-item list-group-item-danger"><a data-toggle="modal" data-target="#exampleModal">Sell Shares</a></li>
                   </ul>
             </div>
@@ -243,7 +243,10 @@ export default {
             time: Date(),
             buyerid: firebase.auth().currentUser.uid,
             sellerid: '',
-            amount: this.form.amount
+            amount: this.form.amount,
+            status: 'pending',
+            paired: false,
+            period: this.form.days
           })
           console.log(residue)
           db.update({total: residue})

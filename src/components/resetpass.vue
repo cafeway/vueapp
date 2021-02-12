@@ -11,12 +11,12 @@
     </v-icon>
        </v-row>
         <div class="card">
-          <div class="card-header">Welcome back</div>
+          <div class="card-header"><b>Reset your password</b></div>
           <div class="card-body">
             <div v-if="error" class="alert alert-danger">{{error}}</div>
             <form action="#" @submit.prevent="submit" >
               <div class="form-group row">
-                <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
+                <label for="email" class="col-md-4 col-form-label text-md-right"><b>Email</b></label>
 
                 <div class="col-md-6">
                   <input
@@ -28,12 +28,13 @@
                     required
                     autofocus
                     v-model="form.email"
+                    placeholder="ninja@gmail.com"
                   />
                 </div>
               </div>
 
               <div class="form-group row">
-                <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+                <label for="password" class="col-md-4 col-form-label text-md-right"><b>Password</b></label>
 
                 <div class="col-md-6">
                   <input
@@ -43,15 +44,28 @@
                     name="password"
                     required
                     v-model="form.password"
+                    placeholder="password"
+                  />
+                </div>
+              </div>
+               <div class="form-group row">
+                <label for="password" class="col-md-4 col-form-label text-md-right"><b>Confirm Password</b></label>
+
+                <div class="col-md-6">
+                  <input
+                    id="confirmpassword"
+                    type="password"
+                    class="form-control"
+                    name="confirmpassword"
+                    placeholder="confirm your password"
+                    required
+                    v-model="form.confirmpassword"
                   />
                 </div>
               </div>
               <div class="form-group row mb-0">
                 <div class="col-md-6 offset-md-4">
-                  <button type="submit" class="btn btn-success  ">Login</button>
-                   <a class="text-danger" href="/resetpassword"><b>Reset password</b></a>
-                   <hr>
-                   <a class="text-success" href="/register"><b>Create a new Account</b></a>
+                  <button type="submit" class="btn btn-success  ">Reset</button>
                 </div>
               </div>
             </form>
@@ -70,23 +84,16 @@ export default {
     return {
       form: {
         email: '',
-        password: ''
+        password: '',
+        confirmpassword: ''
       },
       error: null
     }
   },
   methods: {
     submit () {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(this.form.email, this.form.password)
-        .then(data => {
-          this.$swal('Welcome Back!')
-          this.$router.push('/Dashboard')
-        })
-        .catch(err => {
-          this.error = err.message
-        })
+      let user = firebase.auth().currentUser
+      console.log(user)
     }
   }
 }

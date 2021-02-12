@@ -1,14 +1,21 @@
 <template>
 <v-app>
+
 <section id="tabs" class="project-tab">
             <div class="container">
+             <nav aria-label="breadcrumb" class="main-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="index.html">{{user.data.displayName}}</a></li>
+            </ol>
+          </nav>
                 <div class="row">
                     <div class="col-md-12">
                         <nav>
                             <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                                 <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">PendingShares</a>
                                 <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">MaturedShares</a>
-                                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Project Tab 3</a>
+                                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Transactions & earnings</a>
+                                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-sell" role="tab" aria-controls="nav-contact" aria-selected="false">Sell Panel</a>
                             </div>
                         </nav>
                         <div class="tab-content" id="nav-tabContent">
@@ -36,9 +43,10 @@
                                 <table class="table" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Project Name</th>
-                                            <th>Employer</th>
-                                            <th>Time</th>
+                                           <th class="text-warning">Amount</th>
+                                            <th class="text-info">SellerName</th>
+                                            <th class="text-secondary">Mobile</th>
+                                            <th class="text-danger">status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -64,9 +72,10 @@
                                 <table class="table" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Contest Name</th>
-                                            <th>Date</th>
-                                            <th>Award Position</th>
+                                            <th class="text-warning">Amount</th>
+                                            <th class="text-info">SellerName</th>
+                                            <th class="text-secondary">Mobile</th>
+                                            <th class="text-danger">status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -88,6 +97,52 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <div class="tab-pane fade" id="nav-sell" role="tabpanel" aria-labelledby="nav-contact-tab">
+                            <form>
+  <div class="form-row">
+    <div class="form-group col-md-10">
+      <label for="inputEmail4">Generate a sell code</label>
+      <input type="email" class="form-control" id="inputEmail4" placeholder="">
+      <hr>
+      <button type="submit" class="btn btn-primary">GetCode</button>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputAddress">Address</label>
+    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+  </div>
+  <div class="form-group">
+    <label for="inputAddress2">Address 2</label>
+    <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputCity">City</label>
+      <input type="text" class="form-control" id="inputCity">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputState">State</label>
+      <select id="inputState" class="form-control">
+        <option selected>Choose...</option>
+        <option>...</option>
+      </select>
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputZip">Zip</label>
+      <input type="text" class="form-control" id="inputZip">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="gridCheck">
+      <label class="form-check-label" for="gridCheck">
+        Check me out
+      </label>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Sign in</button>
+</form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -98,27 +153,36 @@
 
 <script>
 import firebase from 'firebase'
+import { mapGetters } from 'vuex'
+let encrypt = require('quick-encrypt')
 export default {
   name: 'HelloWorld',
   data () {
     return {
       share: [],
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      time: '',
+      usermail: ''
     }
   },
   updated: function () {
-    firebase.firestore.collection('shares').doc('available').collection('share').get().then(snapshot => {
+    console.log('updated')
+    console.log(this.user.data.email)
+  },
+  keygen: function (event) {
+    
+  },
+  mounted: function () {
+    var db = firebase.firestore()
+    db.collection('users').doc(this.user.data.email).collection('buyeraccount').get().then(snapshot => {
       snapshot.forEach(doc => {
+        this.share.push(doc.data())
       })
     })
   },
-  mounted: function () {
-    console.log('updated')
-    firebase.firestore().collection('shares').doc('available').collection('share').get().then(snapshot => {
-      snapshot.forEach(doc => {
-        console.log(doc.data())
-        this.share.push(doc.data())
-      })
+  computed: {
+    ...mapGetters({
+      user: 'user'
     })
   }
 }

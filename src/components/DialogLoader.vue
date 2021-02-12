@@ -1,136 +1,161 @@
 <template>
-  <v-app id="inspire">
-    <v-app-bar
-      app
-      color="white"
-      flat
-    >
-      <v-avatar
-        :color="$vuetify.breakpoint.smAndDown ? 'grey darken-1' : 'transparent'"
-        size="32"
-      ></v-avatar>
+  <div class="container" style="padding-top:150px">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">Register</div>
+          <div class="card-body">
+            <div v-if="error" class="alert alert-danger">{{error}}</div>
+            <form action="#" @submit.prevent="submit">
+              <div class="form-group row">
+                <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
 
-      <v-tabs
-        centered
-        class="ml-n9"
-      >
-        <v-tab
-          v-for="link in links"
-          :key="link"
-        >
-          {{ link }}
-        </v-tab>
-      </v-tabs>
+                <div class="col-md-6">
+                  <input
+                    id="name"
+                    type="name"
+                    class="form-control"
+                    name="name"
+                    placeholder="Ninja Brayo"
+                    value
+                    required
+                    autofocus
+                    v-model="form.name"
+                  />
+                </div>
+              </div>
 
-      <v-avatar
-        class="hidden-sm-and-down"
-        color="grey darken-1 shrink"
-        size="32"
-      ></v-avatar>
-    </v-app-bar>
+              <div class="form-group row">
+                <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
 
-    <v-main class="grey lighten-3">
-      <v-container>
-      <v-form v-model="valid">
-    <v-container>
-      <v-row>
-        <v-col
-          cols="12"
-          md="4"
-        >
-          <v-text-field
-            v-model="firstname"
-            :rules="nameRules"
-            :counter="10"
-            label="First name"
-            required
-          ></v-text-field>
-        </v-col>
+                <div class="col-md-6">
+                  <input
+                    id="email"
+                    type="email"
+                    class="form-control"
+                    name="email"
+                    value
+                    required
+                    autofocus
+                    placeholder=" enter a legit email"
+                    v-model="form.email"
+                  />
+                </div>
+              </div>
 
-        <v-col
-          cols="12"
-          md="4"
-        >
-          <v-text-field
-            v-model="lastname"
-            :rules="nameRules"
-            :counter="10"
-            label="Last name"
-            required
-          ></v-text-field>
-        </v-col>
+              <div class="form-group row">
+                <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
 
-        <v-col
-          cols="12"
-          md="4"
-        >
-          <v-btn
-      depressed
-      color="primary"
-    >
-      Transact
-    </v-btn>
-        </v-col>
-      </v-row>
-    </v-container>
-  </v-form>
-        <v-row>
-          <v-col
-            cols="12"
-            sm="2"
-          >
-            <v-sheet
-              rounded="lg"
-              min-height="268"
-            >
-              <!--  -->
-            </v-sheet>
-          </v-col>
+                <div class="col-md-6">
+                  <input
+                    id="password"
+                    type="password"
+                    class="form-control"
+                    name="password"
+                    required
+                    v-model="form.password"
+                  />
+                </div>
+              </div>
 
-          <v-col
-            cols="12"
-            sm="8"
-          >
-            <v-sheet
-              min-height="70vh"
-              rounded="lg"
-            >
-              <!--  -->
-            </v-sheet>
-          </v-col>
+              <div class="form-group row">
+                <label for="phone" class="col-md-4 col-form-label text-md-right">Phone</label>
 
-          <v-col
-            cols="12"
-            sm="2"
-          >
-            <v-sheet
-              rounded="lg"
-              min-height="268"
-            >
-              <!--  -->
-            </v-sheet>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-main>
-  </v-app>
+                <div class="col-md-6">
+                  <input
+                    id="phone"
+                    type="text"
+                    class="form-control"
+                    name="phone"
+                    required
+                    placeholder="0743***1*0"
+                    v-model="form.phone"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="phone" class="col-md-4 col-form-label text-md-right">RefferalCode</label>
+
+                <div class="col-md-6">
+                  <input
+                    id="refferalcode"
+                    type="text"
+                    class="form-control"
+                    name="phone"
+                    placeholder="https:hustlebidders.netlify.app"
+                    v-model="form.refferalcode"
+                  />
+                </div>
+              </div>
+              <div class="form-group row mb-0">
+                <div class="col-md-8 offset-md-4">
+                  <button type="submit" class="btn btn-primary">Register</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
-
 <script>
+import firebase from 'firebase'
 export default {
-  data: () => ({
-    valid: false,
-    firstname: '',
-    lastname: '',
-    nameRules: [
-      v => !!v || 'Name is required',
-      v => v.length <= 10 || 'Name must be less than 10 characters'
-    ],
-    email: '',
-    emailRules: [
-      v => !!v || 'E-mail is required',
-      v => /.+@.+/.test(v) || 'E-mail must be valid'
-    ]
-  })
+  data () {
+    return {
+      form: {
+        email: '',
+        password: '',
+        phone: '',
+        name: '',
+        refferalcode: ''
+      },
+      error: null
+    }
+  },
+  methods: {
+    submit () {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.form.email, this.form.password)
+        .then(data => {
+          var user = firebase.auth().currentUser
+          user.updateProfile({
+            displayName: this.form.name,
+            phoneNumber: this.form.phone
+          })
+          user.sendEmailVerification()
+          const url = require('url')
+          let urlObject = url.parse(this.form.refferalcode, true)
+          let queryData = urlObject.query
+          let referee = queryData.email
+          this.$swal('Account created successfully please check your email to verify your account....')
+          this.$router.push('/')
+          firebase.firestore().collection('users').doc(this.form.email).set({
+            uid: firebase.auth().currentUser.uid,
+            email: this.form.email,
+            phonenumber: this.form.phone,
+            username: this.form.name,
+            shares: 0,
+            MaturedShares: 0,
+            balance: 0
+          })
+          firebase.firestore().collection('users').doc(referee).collection('invitees').doc(this.form.email).set({
+            username: this.form.name,
+            email: this.form.email
+          })
+        })
+        .catch(err => {
+          this.error = err.message
+        })
+    }
+  }
 }
 </script>
+<style>
+body{
+ background-image: url("../assets/crypto.jpg");
+}
+
+</style>

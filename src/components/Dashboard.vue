@@ -1,4 +1,5 @@
 <template>
+<v-app>
 <div class="container">
     <div class="main-body">
     <!-- Breadcrumb -->
@@ -145,7 +146,7 @@
                          <span class="badge">{{refferalMoney}}</span>  </li>
                        <li class="list-group-item list-group-item-info"><a href="/sharesdash">PendingShares</a></li>
                       <li class="list-group-item list-group-item-warning"><a href="/sharesdash">Matured Shares</a></li>
-                      <li class="list-group-item list-group-item-danger"><a data-toggle="modal" data-target="#exampleModal">Sell Shares</a></li>
+                      <li class="list-group-item list-group-item-danger"><a href="/pair">Pair to Earn</a></li>
                   </ul>
             </div>
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -180,6 +181,7 @@
           </div>
         </div>
     </div>
+</v-app>
 </template>
 <script>
 import { mapGetters } from 'vuex'
@@ -234,24 +236,26 @@ export default {
   },
   methods: {
     submit () {
+      var db2 = firebase.firestore()
       var db = firebase.firestore().collection('shares').doc('available')
       db.get().then(snapshot => {
         var data = snapshot.data()
         if (data.total >= 0) {
           let residue = data.total - this.form.amount
-          db.collection('share').doc(Date()).set({
-            time: Date(),
+          db2.collection('users').doc(firebase.auth().currentUser.email).collection('buyeraccount').doc(Date()).set({
+            dob: Date(),
             buyerid: firebase.auth().currentUser.uid,
             sellerid: '',
             amount: this.form.amount,
             status: 'pending',
             paired: false,
-            period: this.form.days
+            period: this.form.days,
+            dop: '',
+            dos: ''
           })
           console.log(residue)
           db.update({total: residue})
           this.$swal('you bought ' + '  ' + this.form.amount + '  ' + ' Shares please pair to activate')
-          this.$router.push('/DialogLoader')
         } else {
           this.$swal('The shares have run out....try again later')
         }

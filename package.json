@@ -27,6 +27,7 @@
     "popper.js": "^1.16.1",
     "pretty-json": "^0.1.1",
     "pubnub": "^4.29.11",
+    "quick-encrypt": "^1.0.8",
     "url-parse": "^1.4.7",
     "url_parser": "^1.0.5",
     "urlgenerator": "^0.7.4",

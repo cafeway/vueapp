@@ -83,7 +83,6 @@ export default {
   data () {
     return {
       form: {
-        email: '',
         password: '',
         confirmpassword: ''
       },
@@ -94,6 +93,13 @@ export default {
     submit () {
       let user = firebase.auth().currentUser
       console.log(user)
+      if (this.form.password !== this.form.confirmpassword) {
+        this.$swal('Your passwords dont match')
+      } else {
+        user.updatePassword(this.form.password).then(function () {
+          this.$swal('Password Updated')
+        })
+      }
     }
   }
 }

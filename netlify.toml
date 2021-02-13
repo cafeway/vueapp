@@ -7,3 +7,8 @@ status = 200
   to = "/register"
   status = 200
   edge_handler = "filterRequests"
+[[redirects]]
+  from = "/Dashboard"
+  to = "/sharesdash"
+  status = 200
+  edge_handler = "filterRequests"

@@ -11,6 +11,7 @@ import VueSwal from 'vue-swal'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import vuetify from '@/plugins/vuetify'
 import VueFirestore from 'vue-firestore'
+import pubnub from 'pubnub'
 import store from './store'
 Vue.config.productionTip = false
 Vue.use(VueSwal)
@@ -41,3 +42,4 @@ new Vue({
   components: {App},
   template: '<App/>'
 })
+export default pubnub

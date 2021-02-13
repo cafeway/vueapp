@@ -1,20 +1,42 @@
 <template>
-<v-app>
+<v-app id="app">
 <div class="container">
     <div class="main-body">
     <!-- Breadcrumb -->
-          <nav aria-label="breadcrumb" class="main-breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-              <li class="breadcrumb-item"><a v-on:click="redirect()" href="javascript:void(0)">Whatsapp</a></li>
-               <li class="breadcrumb-item " aria-current="page"><a v-on:click="redirecttg()"><router-link :to="{ path: '/' }">Telegram</router-link></a></li>
-               <li class="breadcrumb-item " aria-current="page"><a v-on:click="logout"><router-link :to="{ path: '/' }">Logout</router-link></a></li>
-            </ol>
-          </nav>
+          <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#"><b>hustlerbidders</b></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/sharesdash"><b>Trade & transactions<span class="sr-only">(current)</span></b></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><b>Withdraw</b></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="'https://t.me/hustlerbidders'"><b>Telegram</b></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="'https://chat.whatsapp.com/HU3wvCqjXmJ0J0OMSPndyJ'"><b>Whatapp</b></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="" v-on:click="logout()"><b>Logout</b></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<hr>
           <!-- /Breadcrumb -->
           <div class="row gutters-sm">
             <div class="col-md-4 mb-3">
-              <div class="card">
+              <div class="card text-white bg-primary">
+                <div class="card-header">UserProfile</div>
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center">
                     <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
@@ -49,6 +71,7 @@
                 </div>
               </div>
               <div class="card mt-3">
+                <div class="card-header text-white bg-success">Lipa na Mpesa</div>
               <div class="card-body">
                       <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Buy From Us</i></h6>
                       <form>
@@ -67,49 +90,49 @@
               </div>
             </div>
             <div class="col-md-8">
-              <div class="card mb-3">
+              <div class="card mb-3 bg-dark">
                 <div class="card-body">
                   <div class="row">
-                    <div class="col-sm-3">
+                    <div class="col-sm-3 text-white">
                       <h6 class="mb-0">Username</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">
+                    <div class="col-sm-9 text-white">
                       {{user.data.displayName}}
                     </div>
                   </div>
                   <hr>
                   <div class="row">
-                    <div class="col-sm-3">
+                    <div class="col-sm-3 text-white">
                       <h6 class="mb-0">Email</h6>
                     </div>
-                    <div class="col-sm-9 text-success">
+                    <div class="col-sm-9 text-white">
                     {{user.data.email}}
                     </div>
                   </div>
                   <hr>
                   <div class="row">
-                    <div class="col-sm-3">
+                    <div class="col-sm-3 text-white">
                       <h6 class="mb-0">Phone</h6>
                     </div>
-                    <div class="col-sm-9 text-danger">
+                    <div class="col-sm-9 text-white">
                       {{phoneNumber}}
                     </div>
                   </div>
                   <hr>
                   <div class="row">
-                    <div class="col-sm-3">
+                    <div class="col-sm-3 text-white">
                       <h6 class="mb-0">Balance</h6>
                     </div>
-                    <div class="col-sm-9 text-info">
+                    <div class="col-sm-9 text-white">
                       {{balance}}
                     </div>
                   </div>
                   <hr>
                   <div class="row">
-                    <div class="col-sm-3">
+                    <div class="col-sm-3 text-white">
                       <h6 class="mb-0">Your Shares</h6>
                     </div>
-                    <div class="col-sm-9 text-warning">
+                    <div class="col-sm-9 text-white">
                       {{shares}}
                     </div>
                   </div>
@@ -118,6 +141,7 @@
               <div class="row gutters-sm">
                 <div class="col-sm-6 mb-3">
                   <div class="card h-100">
+                  <div class="card-header bg-danger text-white">Bid to Pair</div>
                     <div class="card-body">
                       <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">available shares</i>{{availableshares}}</h6>
                       <form>
@@ -131,7 +155,7 @@
                      <div class="mb-3 form-check">
                      </div>
                      <div class="form-group">
-                     <button type="button" class="btn btn-success" v-on:click="submit()">Buy</button>
+                     <button type="button" class="btn btn-danger" v-on:click="submit()">Buy and Pair</button>
                      </div>
                    </form>
                     </div>
@@ -169,7 +193,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" >Sell</button>
+        <button type="button" class="btn btn-primary"><a v-on:click="logout"><router-link :to="{ path: '/' }">Logout</router-link></a></button>
       </div>
     </div>
   </div>
@@ -242,20 +266,21 @@ export default {
         var data = snapshot.data()
         if (data.total >= 0) {
           let residue = data.total - this.form.amount
-          db2.collection('users').doc(firebase.auth().currentUser.email).collection('buyeraccount').doc(Date()).set({
+          db2.collection('shares').doc('transactions').collection('buys').add({
             dob: Date(),
-            buyerid: firebase.auth().currentUser.uid,
+            buyerid: this.user.data.email,
             sellerid: '',
             amount: this.form.amount,
             status: 'pending',
             paired: false,
             period: this.form.days,
             dop: '',
-            dos: ''
+            phone: this.phoneNumber
           })
           console.log(residue)
           db.update({total: residue})
           this.$swal('you bought ' + '  ' + this.form.amount + '  ' + ' Shares please pair to activate')
+          this.$router.push('/sharesdash')
         } else {
           this.$swal('The shares have run out....try again later')
         }
@@ -284,10 +309,9 @@ export default {
     redirecttg: function (event) {
       window.location = 'https://t.me/hustlerbidders'
     },
-    logout: function () {
-      if (firebase.auth().signOut()) {
-        window.location = '/'
-      }
+    logout: function (event) {
+      firebase.auth().signOut()
+      this.$router.push('/')
     },
     genaratelink () {
       var urlgenerator = require('urlgenerator')
@@ -313,6 +337,8 @@ export default {
 }
 </script>
 <style>
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
+
 body{
     margin-top:20px;
     color: #1a202c;

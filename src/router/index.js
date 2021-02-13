@@ -8,6 +8,7 @@ import DialogLoader from '../components/DialogLoader'
 import resetpassword from '../components/resetpassword'
 import resetpass from '../components/resetpass'
 import sharesdash from '../componentS/sharesdash'
+import sell from '../components/sell'
 Vue.use(Router)
 Vue.use(VueSwal)
 
@@ -49,6 +50,11 @@ const router = new Router({
       path: '/sharesdash',
       name: 'sharesdash',
       component: sharesdash
+    },
+    {
+      path: '/sell',
+      name: 'sell',
+      component: sell
     }
   ]
 })

@@ -7,7 +7,7 @@ import Dashboard from '../components/Dashboard'
 import DialogLoader from '../components/DialogLoader'
 import resetpassword from '../components/resetpassword'
 import resetpass from '../components/resetpass'
-import sharesdash from '../componentS/sharesdash'
+import sharesdash from '../components/sharesdash'
 import sell from '../components/sell'
 Vue.use(Router)
 Vue.use(VueSwal)

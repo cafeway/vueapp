@@ -20,10 +20,10 @@
         <a class="nav-link" href="#"><b>Withdraw</b></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link " href="'https://t.me/hustlerbidders'"><b>Telegram</b></a>
+        <a class="nav-link " href='https://t.me/hustlerbidders'><b>Telegram</b></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link " href="'https://chat.whatsapp.com/HU3wvCqjXmJ0J0OMSPndyJ'"><b>Whatapp</b></a>
+        <a class="nav-link " href='https://chat.whatsapp.com/HU3wvCqjXmJ0J0OMSPndyJ'><b>Whatapp</b></a>
       </li>
       <li class="nav-item">
         <a class="nav-link " href="" v-on:click="logout()"><b>Logout</b></a>
@@ -42,7 +42,7 @@
                     <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
                     <div class="mt-3">
                       <h4>{{user.data.displayName}}</h4>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter">
                          Invite Friends
                       </button>
 
@@ -266,7 +266,7 @@ export default {
         var data = snapshot.data()
         if (data.total >= 0) {
           let residue = data.total - this.form.amount
-          db2.collection('shares').doc('transactions').collection('buys').add({
+          db2.collection('users').doc(this.user.data.email).collection('transactions').doc(this.form.amount).set({
             dob: Date(),
             buyerid: this.user.data.email,
             sellerid: '',
@@ -275,7 +275,8 @@ export default {
             paired: false,
             period: this.form.days,
             dop: '',
-            phone: this.phoneNumber
+            phone: this.phoneNumber,
+            transferdate: ''
           })
           console.log(residue)
           db.update({total: residue})

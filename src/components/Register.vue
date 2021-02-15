@@ -140,9 +140,10 @@ export default {
             MaturedShares: 0,
             balance: 0
           })
-          firebase.firestore().collection('users').doc(referee).collection('invitees').doc(this.form.email).set({
+          firebase.firestore().collection('users').doc(referee).collection('invitees').add({
             username: this.form.name,
-            email: this.form.email
+            email: this.form.email,
+            phone: this.form.phone
           })
         })
         .catch(err => {

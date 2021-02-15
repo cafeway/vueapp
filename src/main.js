@@ -13,8 +13,11 @@ import vuetify from '@/plugins/vuetify'
 import VueFirestore from 'vue-firestore'
 import pubnub from 'pubnub'
 import store from './store'
+import { Chat } from 'vue-quick-chat'
+import PubNubVue from 'pubnub-vue'
 Vue.config.productionTip = false
 Vue.use(VueSwal)
+Vue.use(PubNubVue, { subscribeKey: 'sub-c-21100d28-6bb9-11eb-889a-ee4206f2a398', publishKey: 'pub-c-f512a648-0b68-418a-a761-487b845677ff' })
 Vue.use(Vuex)
 Vue.use(firestorePlugin)
 Vue.use(VueFirestore)
@@ -38,6 +41,7 @@ new Vue({
   el: '#app',
   router,
   store,
+  Chat,
   vuetify,
   components: {App},
   template: '<App/>'

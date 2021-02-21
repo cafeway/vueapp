@@ -4,7 +4,7 @@
     <div class="main-body">
     <!-- Breadcrumb -->
           <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#"><b>hustlerbidders</b></a>
+  <a class="navbar-brand" href="#"><b>hustlebidders</b></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -14,16 +14,16 @@
         <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/sharesdash"><b>Trade & transactions<span class="sr-only">(current)</span></b></a>
+        <a class="nav-link" href="/sharesdash">Profile<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#"><b>Withdraw</b></a>
+        <a class="nav-link" href="/sell">Sell Shares<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link " href='https://t.me/hustlerbidders'><b>Telegram</b></a>
+        <a class="nav-link " href='https://t.me/hustlerbidders'>Telegram</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link " href='https://chat.whatsapp.com/HU3wvCqjXmJ0J0OMSPndyJ'><b>Whatapp</b></a>
+        <a class="nav-link " href='https://chat.whatsapp.com/HU3wvCqjXmJ0J0OMSPndyJ'>Whatapp</a>
       </li>
       <li class="nav-item">
         <a class="nav-link " href="" v-on:click="logout()"><b>Logout</b></a>
@@ -71,16 +71,20 @@
                 </div>
               </div>
               <div class="card mt-3">
-                <div class="card-header text-white bg-success">Lipa na Mpesa</div>
+                <div class="card-header text-white bg-success">Transfer Coins</div>
               <div class="card-body">
-                      <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Buy From Us</i></h6>
+                      <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2"></i></h6>
                       <form>
                         <div class="form-group">
-                          <input type="amount" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter amount e.g ksh 500">
-                          <small id="emailHelp" class="form-text text-muted">Note transaction fees inclusive</small>
+                          <input type="number"  class="form-control" id="transferamount" aria-describedby="emailHelp" placeholder="Enter the amount you want to transfer ">
                         </div>
+                        <hr>
                         <div class="form-group">
-                          <input type="email" class="form-control" id="till" aria-describedby="emailHelp" placeholder="till number : 5674451 ">
+                          <input type="email" class="form-control" id="SellerEmail" aria-describedby="emailHelp" placeholder="Enter Your Email ">
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                          <input type="email" class="form-control"   id="BuyerEmail" aria-describedby="emailHelp" placeholder="Enter Your Peers Email">
                         </div>
                         <div class="form-group">
                         <button type="button" class="btn btn-success" v-on:click="Pay" >Lipa na Mpesa</button>
@@ -141,7 +145,7 @@
               <div class="row gutters-sm">
                 <div class="col-sm-6 mb-3">
                   <div class="card h-100">
-                  <div class="card-header bg-danger text-white">Bid to Pair</div>
+                  <div class="card-header bg-danger text-white"><b>Bid</b></div>
                     <div class="card-body">
                       <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">available shares</i>{{availableshares}}</h6>
                       <form>
@@ -263,10 +267,12 @@ export default {
       var db2 = firebase.firestore()
       var db = firebase.firestore().collection('shares').doc('available')
       db.get().then(snapshot => {
+        let date = new Date()
+        console.log(date.getDate())
         var data = snapshot.data()
         if (data.total >= 0) {
           let residue = data.total - this.form.amount
-          db2.collection('users').doc(this.user.data.email).collection('transactions').doc(this.form.amount).set({
+          db2.collection('users').doc(this.user.data.email).collection('transactions').add({
             dob: Date(),
             buyerid: this.user.data.email,
             sellerid: '',
@@ -276,7 +282,14 @@ export default {
             period: this.form.days,
             dop: '',
             phone: this.phoneNumber,
-            transferdate: ''
+            transferdate: '',
+            sold: false
+          })
+          db2.collection('users').doc(this.user.data.email).collection('records').add({
+            amount: this.form.amount,
+            date: Date(),
+            party: this.user.data.email,
+            transactionType: 'bid'
           })
           console.log(residue)
           db.update({total: residue})

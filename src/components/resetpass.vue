@@ -105,8 +105,4 @@ export default {
 }
 </script>
 <style>
-body {
-  background-image: url("../assets/crypto.jpg");
-
-}
 </style>

@@ -84,7 +84,8 @@ export default {
         selleremail: '',
         transferamount: 0,
         sellerbal: 0,
-        buyerbal: ''
+        buyerbal: '',
+        sellersphone: ''
       },
       error: null
     }
@@ -137,7 +138,7 @@ export default {
         db.collection('users').doc(this.form.buyeremail).collection('records').add({
           amount: this.form.transferamount,
           date: Date(),
-          party: this.form.buyeremail,
+          party: this.sellersphone,
           transactionType: 'purchase'
         })
         db.collection('bids').add({
@@ -175,6 +176,9 @@ export default {
     db.collection('users').doc(this.user.data.email).get().then(snapshot => {
       this.sellerbal = snapshot.data().shares
       this.sellerid = snapshot.data().phonenumber
+    })
+    db.collection('users').doc(this.form.buyeremail).get().then(snapshot => {
+      this.sellersphone = snapshot.data().phonenumber
     })
   },
   computed: {

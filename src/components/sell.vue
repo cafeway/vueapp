@@ -1,5 +1,10 @@
 <template>
   <div class="container" style="padding-top:150px">
+  <p id="days"></p>
+    <p id="hours"></p>
+    <p id="mins"></p>
+    <p id="secs"></p>
+    <h2 id="end"></h2>
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="card">
@@ -79,22 +84,49 @@ export default {
         selleremail: '',
         transferamount: 0,
         sellerbal: 0,
-        buyerbal: 0,
-        mail: ''
+        buyerbal: ''
       },
       error: null
     }
   },
   methods: {
+    addDays: function (date, days) {
+      const copy = new Date(date)
+      copy.setDate(date.getDate() + days)
+      return copy
+    },
+    getBuyerBal: function (buyeremail) {
+      var db = firebase.firestore()
+      db.collection('users').doc(buyeremail).get().then(snapshot => {
+        let bal = snapshot.data().shares
+        return bal
+      })
+    },
+    countdown: function () {
+      var countDownDate = new Date('Jan 5, 2022 15:37:25').getTime()
+      var x = setInterval(() => {
+        var now = new Date().getTime()
+        var distance = countDownDate - now
+
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24))
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000)
+        document.getElementById('demo').innerHTML = days + 'd ' + hours + 'h' + minutes + 'm' + seconds + 's'
+        if (distance < 0) {
+          clearInterval(x)
+          document.getElementById('demo').innerHTML = 'Expired'
+        }
+      }, 1000)
+    },
     submit () {
       let db = firebase.firestore()
       let sellershares = this.sellerbal - this.form.transferamount
+      let date = new Date()
+      let maturedate = this.addDays(date, 2)
       if (this.form.transferamount <= this.sellerbal) {
         db.collection('users').doc(this.user.data.email).update({
           shares: sellershares
-        })
-        db.collection('users').doc(this.form.buyeremail).update({
-          shares: this.form.transferamount
         })
         db.collection('users').doc(this.user.data.email).collection('records').add({
           amount: this.form.transferamount,
@@ -108,15 +140,29 @@ export default {
           party: this.form.buyeremail,
           transactionType: 'purchase'
         })
-        db.collection('users').doc(this.form.buyeremail).collection('transactions').add({
+        db.collection('bids').add({
           dop: Date(),
           buyerid: this.form.buyeremail,
-          sellerid: this.form.selleremail,
+          sellerid: this.sellerid,
           amount: this.form.transferamount,
           status: 'transfered',
           paired: true,
           transferdate: '',
-          sold: false
+          sold: true,
+          matureDate: maturedate
+        })
+        db.collection('users').doc(this.form.buyeremail).get().then(snapshot => {
+          var buyerdata = snapshot.data().shares
+          var newdata = parseFloat(this.form.transferamount) + parseFloat(buyerdata)
+          let db = firebase.firestore()
+          db.collection('users').doc(this.form.buyeremail).update({
+            shares: newdata
+          })
+        })
+        db.collection('users').doc(this.form.buyeremail).collection('messages').add({
+          message: 'You have received',
+          amount: this.form.transferamount,
+          sender: this.sellerid
         })
         this.$swal('success')
       } else {
@@ -128,6 +174,7 @@ export default {
     var db = firebase.firestore()
     db.collection('users').doc(this.user.data.email).get().then(snapshot => {
       this.sellerbal = snapshot.data().shares
+      this.sellerid = snapshot.data().phonenumber
     })
   },
   computed: {

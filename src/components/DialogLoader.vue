@@ -1,102 +1,12 @@
 <template>
-  <div class="container" style="padding-top:150px">
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        <div class="card">
-          <div class="card-header">Register</div>
-          <div class="card-body">
-            <div v-if="error" class="alert alert-danger">{{error}}</div>
-            <form action="#" @submit.prevent="submit">
-              <div class="form-group row">
-                <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
-
-                <div class="col-md-6">
-                  <input
-                    id="name"
-                    type="name"
-                    class="form-control"
-                    name="name"
-                    placeholder="Ninja Brayo"
-                    value
-                    required
-                    autofocus
-                    v-model="form.name"
-                  />
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
-
-                <div class="col-md-6">
-                  <input
-                    id="email"
-                    type="email"
-                    class="form-control"
-                    name="email"
-                    value
-                    required
-                    autofocus
-                    placeholder=" enter a legit email"
-                    v-model="form.email"
-                  />
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
-
-                <div class="col-md-6">
-                  <input
-                    id="password"
-                    type="password"
-                    class="form-control"
-                    name="password"
-                    required
-                    v-model="form.password"
-                  />
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label for="phone" class="col-md-4 col-form-label text-md-right">Phone</label>
-
-                <div class="col-md-6">
-                  <input
-                    id="phone"
-                    type="text"
-                    class="form-control"
-                    name="phone"
-                    required
-                    placeholder="0743***1*0"
-                    v-model="form.phone"
-                  />
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="phone" class="col-md-4 col-form-label text-md-right">RefferalCode</label>
-
-                <div class="col-md-6">
-                  <input
-                    id="refferalcode"
-                    type="text"
-                    class="form-control"
-                    name="phone"
-                    placeholder="https:hustlebidders.netlify.app"
-                    v-model="form.refferalcode"
-                  />
-                </div>
-              </div>
-              <div class="form-group row mb-0">
-                <div class="col-md-8 offset-md-4">
-                  <button type="submit" class="btn btn-primary">Register</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="container-fluid">
+  <form class="form-inline">
+  <div class="form-group mb-2">
+    <label for="staticEmail2" class="sr-only">Email</label>
+    <input type="text" readonly class="form-control-plaintext" v-model="nextbid" id="nextbid" value="25/12/1990" placeholder="Jan 5, 2022 15:37:25">
+  </div>
+  <button type="submit" class="btn btn-primary mb-2">Set</button>
+</form>
   </div>
 </template>
 <script>
@@ -105,53 +15,17 @@ export default {
   data () {
     return {
       form: {
-        email: '',
-        password: '',
-        phone: '',
-        name: '',
-        refferalcode: ''
-      },
-      error: null
+        nextbid: ''
+      }
     }
   },
   methods: {
-    submit () {
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(this.form.email, this.form.password)
-        .then(data => {
-          var user = firebase.auth().currentUser
-          user.updateProfile({
-            displayName: this.form.name,
-            phoneNumber: this.form.phone
-          })
-          user.sendEmailVerification()
-          const url = require('url')
-          let urlObject = url.parse(this.form.refferalcode, true)
-          let queryData = urlObject.query
-          let referee = queryData.email
-          this.$swal('Account created successfully please check your email to verify your account....')
-          this.$router.push('/')
-          firebase.firestore().collection('users').doc(this.form.email).set({
-            uid: firebase.auth().currentUser.uid,
-            email: this.form.email,
-            phonenumber: this.form.phone,
-            username: this.form.name,
-            shares: 0,
-            MaturedShares: 0,
-            balance: 0
-          })
-          firebase.firestore().collection('users').doc(referee).collection('invitees').doc(this.form.email).set({
-            username: this.form.name,
-            email: this.form.email
-          })
-        })
-        .catch(err => {
-          this.error = err.message
-        })
+    submit: function () {
+      var db = firebase.firestore()
+      db.collection('timer').doc('next').add({
+        tickdate: this.form.nextbid
+      })
     }
   }
 }
 </script>
-<style>
-</style>

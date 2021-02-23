@@ -71,25 +71,10 @@
                 </div>
               </div>
               <div class="card mt-3">
-                <div class="card-header text-white bg-success">Transfer Coins</div>
+                <div class="card-header text-white bg-success">Time Left Till Next Bid</div>
               <div class="card-body">
                       <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2"></i></h6>
-                      <form>
-                        <div class="form-group">
-                          <input type="number"  class="form-control" id="transferamount" aria-describedby="emailHelp" placeholder="Enter the amount you want to transfer ">
-                        </div>
-                        <hr>
-                        <div class="form-group">
-                          <input type="email" class="form-control" id="SellerEmail" aria-describedby="emailHelp" placeholder="Enter Your Email ">
-                        </div>
-                        <hr>
-                        <div class="form-group">
-                          <input type="email" class="form-control"   id="BuyerEmail" aria-describedby="emailHelp" placeholder="Enter Your Peers Email">
-                        </div>
-                        <div class="form-group">
-                        <button type="button" class="btn btn-success" v-on:click="Pay" >Lipa na Mpesa</button>
-                      </div>
-                      </form>
+                      <h3 id="demo" class="text-primary"><b>Time left to next Bid</b></h3>
                     </div>
               </div>
             </div>
@@ -174,7 +159,30 @@
                          <span class="badge">{{refferalMoney}}</span>  </li>
                        <li class="list-group-item list-group-item-info"><a href="/sharesdash">PendingShares</a></li>
                       <li class="list-group-item list-group-item-warning"><a href="/sharesdash">Matured Shares</a></li>
-                      <li class="list-group-item list-group-item-danger"><a href="/pair">Pair to Earn</a></li>
+                      <li class="list-group-item list-group-item-light"><button type="button"   class="btn btn-primary" value="Messages">Messages<span class="badge badge-light">{{messages}}</span>
+                      <div class="modal fade" id="exampleModalScrollabl" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ol v-for="inb in inbox" :key="inb.id">
+        <p>{{inb.message + inb.amount}}</p>
+        </ol>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+</button>
+</li>
                   </ul>
             </div>
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -241,13 +249,22 @@ export default {
         amount: 0,
         days: 0,
         sharesOnSale: 0
-      }
+      },
+      inbox: '',
+      messages: 0
     }
   },
+  created: function () {
+  },
   updated: function () {
+    this.countdown()
     console.log('updated')
     var db = firebase.firestore()
     var user = firebase.auth().currentUser
+    db.collection('users').doc(this.user.data.email).collection('messages').get().then(snapshot => {
+      this.inbox.push(snapshot.data())
+      this.messages = snapshot.size
+    })
     db.collection('users').doc(user.email).get().then(snapshot => {
       const doc = snapshot.data()
       this.phoneNumber = doc.phonenumber
@@ -263,6 +280,23 @@ export default {
     })
   },
   methods: {
+    countdown: function () {
+      var countDownDate = new Date('Jan 5, 2022 15:37:25').getTime()
+      var x = setInterval(() => {
+        var now = new Date().getTime()
+        var distance = countDownDate - now
+
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24))
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000)
+        document.getElementById('demo').innerHTML = days + 'd ' + hours + 'h' + minutes + 'm' + seconds + 's'
+        if (distance < 0) {
+          clearInterval(x)
+          document.getElementById('demo').innerHTML = 'Expired'
+        }
+      }, 1000)
+    },
     submit () {
       var db2 = firebase.firestore()
       var db = firebase.firestore().collection('shares').doc('available')
@@ -272,9 +306,10 @@ export default {
         var data = snapshot.data()
         if (data.total >= 0) {
           let residue = data.total - this.form.amount
-          db2.collection('users').doc(this.user.data.email).collection('transactions').add({
+          db2.collection('bids').add({
             dob: Date(),
-            buyerid: this.user.data.email,
+            buyerid: this.phoneNumber,
+            buyeremail: this.user.data.email,
             sellerid: '',
             amount: this.form.amount,
             status: 'pending',
@@ -293,7 +328,7 @@ export default {
           })
           console.log(residue)
           db.update({total: residue})
-          this.$swal('you bought ' + '  ' + this.form.amount + '  ' + ' Shares please pair to activate')
+          this.$swal('you bought ' + '  ' + this.form.amount + '  ' + ' Buy to activate')
           this.$router.push('/sharesdash')
         } else {
           this.$swal('The shares have run out....try again later')
@@ -330,7 +365,7 @@ export default {
     genaratelink () {
       var urlgenerator = require('urlgenerator')
       var createURLwithParameters = urlgenerator.createURLwithParameters
-      var baseURL = 'https://hustlerbidders.netlify.com/refferals'
+      var baseURL = 'https://hustlerbidders.netlify.com/register'
       var useremail = firebase.auth().currentUser.email
       var parameters = {'email': useremail}
       var finalURL = createURLwithParameters(baseURL, parameters)

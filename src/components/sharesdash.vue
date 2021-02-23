@@ -42,7 +42,7 @@
                                             <th class="text-secondary">Amount</th>
                                             <th class="text-success">Status</th>
                                             <th class="text-warning">Seller</th>
-                                            <th class="text-danger">MatureDate</th>
+                                            <th class="text-danger">Timer</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -50,6 +50,7 @@
                                             <td><a href="#">{{running.amount}}</a></td>
                                             <td>{{running.status}}</td>
                                             <td>{{running.sellerid}}</td>
+                                            <td id="timer"></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -58,9 +59,9 @@
                                 <table class="table" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Contest Name</th>
+                                            <th>Amount</th>
                                             <th>Date</th>
-                                            <th>Award Position</th>
+                                            <th>interest</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -153,18 +154,40 @@ export default {
     }
   },
   methods: {
+    addDays: function (date, days) {
+      const copy = new Date(date)
+      copy.setDate(date.getDate() + days)
+      return copy
+    },
     rdrtosell: function (event) {
       this.$router.push('/sell')
+    },
+    countdown: function () {
+      var countDownDate = new Date('Jan 5, 2022 15:37:25').getTime()
+      var x = setInterval(() => {
+        var now = new Date().getTime()
+        var distance = countDownDate - now
+
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24))
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000)
+        document.getElementById('demo').innerHTML = days + 'd ' + hours + 'h' + minutes + 'm' + seconds + 's'
+        if (distance < 0) {
+          clearInterval(x)
+          document.getElementById('demo').innerHTML = 'Expired'
+        }
+      }, 1000)
     }
   },
   mounted: function () {
     let db = firebase.firestore()
-    db.collection('users').doc(this.user.data.email).collection('transactions').where('paired', '==', false).get().then(snapshot => {
+    db.collection('bids').where('buyeremail', '==', this.user.data.email, 'paired', '==', false, 'sold', '==', 'no').get().then(snapshot => {
       snapshot.forEach(doc => {
         this.pending.push(doc.data())
       })
     })
-    db.collection('users').doc(this.user.data.email).collection('transactions').where('status', '==', 'transfered').get().then(snapshot => {
+    db.collection('bids').where('status', '==', 'transfered', 'paired', '==', 'true', 'sold', '==', 'yes').get().then(snapshot => {
       snapshot.forEach(doc => {
         this.running.push(doc.data())
       })

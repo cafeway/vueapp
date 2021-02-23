@@ -70,8 +70,8 @@
                         <li>
                             <a class="sidebar-item d-flex justify-content-between align-items-center">
                                 Availableshares
-                                <span class="fa fa-balance-scale"></span>
                                 <span class="side-notif" title="1 new comment">{{availableshares}}</span>
+                                <span class="fa fa-balance-scale"></span>
                             </a>
                         </li>
                         <li>

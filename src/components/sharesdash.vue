@@ -42,7 +42,7 @@
                                             <th class="text-secondary">Amount</th>
                                             <th class="text-success">Status</th>
                                             <th class="text-warning">Seller</th>
-                                            <th class="text-danger">Timer</th>
+                                            <th class="text-danger">Confirm</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -50,7 +50,7 @@
                                             <td><a href="#">{{running.amount}}</a></td>
                                             <td>{{running.status}}</td>
                                             <td>{{running.sellerid}}</td>
-                                            <td id="timer"></td>
+                                            <td><button class="btn btn-primary">confirm</button></td>
                                         </tr>
                                     </tbody>
                                 </table>

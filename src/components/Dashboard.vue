@@ -1,57 +1,188 @@
 <template>
-<v-app id="app">
 <div class="container">
-    <div class="main-body">
-    <!-- Breadcrumb -->
-          <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#"><b>hustlebidders</b></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/sharesdash">Profile<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/sell">Sell Shares<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link " href='https://t.me/hustlerbidders'>Telegram</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link " href='https://chat.whatsapp.com/HU3wvCqjXmJ0J0OMSPndyJ'>Whatapp</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link " href="" v-on:click="logout()"><b>Logout</b></a>
-      </li>
-    </ul>
-  </div>
-</nav>
-<hr>
-          <!-- /Breadcrumb -->
-          <div class="row gutters-sm">
-            <div class="col-md-4 mb-3">
-              <div class="card text-white bg-primary">
-                <div class="card-header">UserProfile</div>
-                <div class="card-body">
-                  <div class="d-flex flex-column align-items-center text-center">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
-                    <div class="mt-3">
-                      <h4>{{user.data.displayName}}</h4>
-                      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter">
-                         Invite Friends
-                      </button>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
-                      <!-- Modal -->
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" target="_blank" href="">
+                HUSTLE BIDDERS
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="ml-auto navbar-nav text-uppercase">
+                    <li class="nav-item active">
+                        <a class="nav-link p-3" href="#">Zero Risks!<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link p-3" href="">About us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link p-3" href="">FAQ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link p-3" href="">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link p-3" href="">Sign Out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<section id="about-us" class="py-5">
+    <div class="container">
+        <div class="row">
+             <!--left sidebar-->
+            <div class="col-md-3 pr-md-4">
+                <div class="sidebar-left">
+                    <!--sidebar menu-->
+                    <ul class="list-unstyled sidebar-menu pl-md-2 pr-md-0">
+                        <li>
+                            <a class="sidebar-item active d-flex justify-content-between align-items-center" href="https://bootstrap.news/bootstrap-4-template-news-portal-magazine/">
+                                Dashboard
+                                <span class="fas fa-tachometer-alt"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="sidebar-item d-flex justify-content-between align-items-center" href="https://bootstrap.news/bootstrap-4-template-news-portal-magazine/">
+                                Profile
+                                <span class="fas fa-user"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="sidebar-item d-flex justify-content-between align-items-center" href="https://bootstrap.news/bootstrap-4-template-news-portal-magazine/">
+                                Refferals
+                                <span class="side-notif" title="1 new comment">{{refferalMoney}}</span>
+                                <span class="fa fa-rss"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="sidebar-item d-flex justify-content-between align-items-center" href="https://chat.whatsapp.com/HU3wvCqjXmJ0J0OMSPndyJ">
+                                whatsapp
+                                <span class="side-notif" title="1 new comment">1</span>
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="sidebar-item d-flex justify-content-between align-items-center" href="https://t.me/hustlerbidders">
+                                Telegram Channel
+                                <span class="fa fa-paper-plane"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="sidebar-item d-flex justify-content-between align-items-center" href="https://bootstrap.news/bootstrap-4-template-news-portal-magazine/">
+                                Tokens
+                                <span class="side-notif" title="1 new comment">{{shares}}</span>
+                                <span class="fa fa-database" aria-hidden="true" ></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="sidebar-item d-flex justify-content-between align-items-center" href="https://bootstrap.news/bootstrap-4-template-news-portal-magazine/">
+                                Setting
+                                <span class="fas fa-cog"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="sidebar-item d-flex justify-content-between align-items-center" href="/">
+                                Sign out
+                                <span class="fas fa-sign-out-alt"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--Content-->
+            <div class="col-md-9">
+                <div class="dashboard-area">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="mb-3 bg-dark">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <a class="position-absolute ml-3 mt-3 text-white" href="setting.html" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Edit cover images"><i class="fas fa-cog"></i></a>
+                                        <div class="row">
+                                            <div class="col-md-6 ml-auto mr-auto">
+                                               <div class="profiles p-3 my-4 rounded text-center shadow-sm">
+                                                    <div class="avatars">
+                                                        <a href="setting.html">
+                                                            <img src="https://demo.bootstrap.news/bootnews/assets/img/avatar/avatar1.png" alt="Circle Image" class="avatar-lg rounded-circle img-fluid" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Edit avatar images">
+                                                        </a>
+                                                    </div>
+                                                    <div class="names">
+                                                        <h3 class="title text-light">@{{this.user.data.displayName}}</h3>
+                                                        <a href="#" class="btn btn-link btn-facebook"><i class="fab fa-facebook"></i></a>
+                                                        <a href="#" class="btn btn-link btn-twitter"><i class="fab fa-twitter"></i></a>
+                                                        <a href="#" class="btn btn-link btn-gplus"><i class="fab fa-google-plus"></i></a>
+                                                        <a href="#" class="btn btn-link btn-instagram"><i class="fab fa-instagram"></i></a>
+                                                        <a href="#" class="btn btn-link btn-youtube"><i class="fab fa-youtube"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                     </div>
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active show" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Dashboard</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Buy</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="pills-tabContent">
+                                <div class="tab-pane fade active show" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-sm-6">
+                                            <a class="member-item" href="/sharesdash">
+                                                <div class="card mb-2 mb-md-5 py-3">
+                                                    <div class="content">
+                                                        <div class="row">
+                                                            <div class="col-6 d-flex justify-content-center align-items-center">
+                                                                <div class="icon-big text-warning text-center">
+                                                                    <i class="fa fa-credit-card"></i>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6 d-flex justify-content-center align-items-center">
+                                                                <div class="numbers">
+                                                                    <p class="text-secondary">Transactions</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-lg-4 col-sm-6">
+                                            <a class="member-item" data-toggle="modal" data-target="#exampleModalCenter">
+                                                <div class="card mb-2 mb-md-5 py-3">
+                                                    <div class="content">
+                                                        <div class="row">
+                                                            <div class="col-6 d-flex justify-content-center align-items-center">
+                                                                <div class="icon-big text-info text-center" title="1 new comment">
+                                                                    <div class="notif">1</div>
+                                                                    <i class="fa fa-user-md"></i>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6 d-flex justify-content-center align-items-center">
+                                                                <div class="numbers">
+                                                                    <p>Invite Friends</p>
                     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                    <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
                    <div class="modal-header">
-             <h5 class="modal-title" id="exampleModalLongTitle">Share this link for rewards</h5>
+             <h5 class="modal-title" id="exampleModalLongTitle">Redeem url!..send it to friends as a refferal</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -61,79 +192,112 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" v-on:click="genaratelink()" >Generate link</button>
+        <button type="button" class="btn btn-primary" v-on:click="genaratelink()" >Share link</button>
       </div>
     </div>
   </div>
 </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card mt-3">
-                <div class="card-header text-white bg-success">Time Left Till Next Bid</div>
-              <div class="card-body">
-                      <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2"></i></h6>
-                      <h3 id="demo" class="text-primary"><b>Time left to next Bid</b></h3>
-                    </div>
-              </div>
-            </div>
-            <div class="col-md-8">
-              <div class="card mb-3 bg-dark">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-sm-3 text-white">
-                      <h6 class="mb-0">Username</h6>
-                    </div>
-                    <div class="col-sm-9 text-white">
-                      {{user.data.displayName}}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3 text-white">
-                      <h6 class="mb-0">Email</h6>
-                    </div>
-                    <div class="col-sm-9 text-white">
-                    {{user.data.email}}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3 text-white">
-                      <h6 class="mb-0">Phone</h6>
-                    </div>
-                    <div class="col-sm-9 text-white">
-                      {{phoneNumber}}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3 text-white">
-                      <h6 class="mb-0">Balance</h6>
-                    </div>
-                    <div class="col-sm-9 text-white">
-                      {{balance}}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3 text-white">
-                      <h6 class="mb-0">Your Shares</h6>
-                    </div>
-                    <div class="col-sm-9 text-white">
-                      {{shares}}
-                    </div>
-                  </div>
-                   </div>
-              </div>
-              <div class="row gutters-sm">
-                <div class="col-sm-6 mb-3">
-                  <div class="card h-100">
-                  <div class="card-header bg-danger text-white"><b>Bid</b></div>
-                    <div class="card-body">
-                      <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">available shares</i>{{availableshares}}</h6>
-                      <form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-lg-4 col-sm-6">
+                                            <a class="member-item" href="/sell">
+                                                <div class="card mb-2 mb-md-5 py-3">
+                                                    <div class="content">
+                                                        <div class="row">
+                                                            <div class="col-6 d-flex justify-content-center align-items-center">
+                                                                <div class="icon-big text-danger text-center">
+                                                                    <i class="fa fa-money"></i>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6 d-flex justify-content-center align-items-center">
+                                                                <div class="numbers">
+                                                                    <p>Sell Tokens</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-lg-4 col-sm-6">
+                                            <a class="member-item" href="">
+                                                <div class="card mb-2 mb-md-5 py-3">
+                                                    <div class="content">
+                                                        <div class="row">
+                                                            <div class="col-6 d-flex justify-content-center align-items-center">
+                                                                <div class="icon-big text-twitter text-center" title="1 new messages">
+                                                                    <div class="notif">1</div>
+                                                                    <i class="fa fa-suitcase  "></i>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6 d-flex justify-content-center align-items-center">
+                                                                <div class="numbers">
+                                                                    <p>Records</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-lg-4 col-sm-6">
+                                            <a class="member-item" href="/sharesdash">
+                                                <div class="card mb-2 mb-md-5 py-3">
+                                                    <div class="content">
+                                                        <div class="row">
+                                                            <div class="col-6 d-flex justify-content-center align-items-center">
+                                                                <div class="icon-big text-facebook text-center">
+                                                                    <i class="fa fa-clock-o"></i>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6 d-flex justify-content-center align-items-center">
+                                                                <div class="numbers">
+                                                                    <p>Running Shares</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-lg-4 col-sm-6">
+                                            <a class="member-item" href="/sharesdash">
+                                                <div class="card mb-2 mb-md-5 py-3">
+                                                    <div class="content">
+                                                        <div class="row">
+                                                            <div class="col-6 d-flex justify-content-center align-items-center">
+                                                                <div class="icon-big text-success text-center">
+                                                                    <i class="fa fa-graduation-cap"></i>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6 d-flex justify-content-center align-items-center">
+                                                                <div class="numbers">
+                                                                    <p>Matured Shares</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                    <div class="p-3 border mb-3">
+                                        <a class="position-absolute" style="right: 25px" href="setting.html" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Edit profile"><i class="fas fa-cog"></i></a>
+                                        <h3>{{this.user.data.displayName}}</h3>
+                                        <p><b>Tokens: </b>{{shares}}</p>
+                                        <p><b>Address:  </b> {{this.user.data.email}}</p>
+                                        <p><b>Phone:  </b>{{phoneNumber}}</p>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                                              <form>
                       <div class="mb-3">
                         <input type="number" name="days" required="required"  v-model="form.days" class="form-control" id="days"  aria-describedby="emailHelp" placeholder="number of days to the bids maturity">
                       </div>
@@ -147,77 +311,16 @@
                      <button type="button" class="btn btn-danger" v-on:click="submit()">Buy and Pair</button>
                      </div>
                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
-                <div class="col-sm-6 mb-3">
-                  <div class="card h-100">
-                    <div class="card-body">
-                      <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">YourData</i> and current Status</h6>
-                      <ul class="list-group">
-                      <li class="list-group-item list-group-item-success"> Refferal Money ksh:
-                         <span class="badge">{{refferalMoney}}</span>  </li>
-                       <li class="list-group-item list-group-item-info"><a href="/sharesdash">PendingShares</a></li>
-                      <li class="list-group-item list-group-item-warning"><a href="/sharesdash">Matured Shares</a></li>
-                      <li class="list-group-item list-group-item-light"><button type="button"   class="btn btn-primary" value="Messages">Messages<span class="badge badge-light">{{messages}}</span>
-                      <div class="modal fade" id="exampleModalScrollabl" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalScrollableTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <ol v-for="inb in inbox" :key="inb.id">
-        <p>{{inb.message + inb.amount}}</p>
-        </ol>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-</button>
-</li>
-                  </ul>
             </div>
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">Sell Your Shares</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <form>
-  <div class="row">
-    <div class="col">
-      <input type="" id="sharesOnSale" class="form-control" placeholder="amount you wish to sell">
-    </div>
-  </div>
-</form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary"><a v-on:click="logout"><router-link :to="{ path: '/' }">Logout</router-link></a></button>
-      </div>
-    </div>
-  </div>
-</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
     </div>
-</v-app>
+</section>
+</div>
 </template>
 <script>
 import { mapGetters } from 'vuex'
@@ -278,6 +381,11 @@ export default {
     db.collection('users').doc(user.email).collection('invitees').get().then(snapshot => {
       this.refferalMoney = snapshot.size * 20
     })
+  },
+  mounted: function () {
+    let externalScript = document.createElement('script')
+    externalScript.setAttribute('src', 'https://use.fontawesome.com/1d87a0aaab.js')
+    document.head.appendChild(externalScript)
   },
   methods: {
     countdown: function () {
@@ -385,67 +493,192 @@ export default {
   }
 }
 </script>
-<style>
-@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
-
-body{
-    margin-top:20px;
-    color: #1a202c;
-    text-align: left;
-    background-color: #e2e8f0;
-}
-.main-body {
-    padding: 15px;
-}
-.card {
-    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+<style scoped>
+/*------------------------------------
+  Social color
+------------------------------------*/
+.text-facebook, .hover-facebook-text:hover i, .hover-facebook a:hover i {
+  color: #3b5998;
 }
 
-.card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 0 solid rgba(0,0,0,.125);
-    border-radius: .25rem;
+.bg-facebook, .btn-facebook {
+  background-color: #3b5998;
+  color: #fff;
 }
 
-.card-body {
-    flex: 1 1 auto;
-    min-height: 1px;
-    padding: 1rem;
+.text-twitter, .hover-twitter-text:hover i, .hover-twitter a:hover i {
+  color: #00aced;
 }
 
-.gutters-sm {
-    margin-right: -8px;
-    margin-left: -8px;
+.bg-twitter, .btn-twitter {
+  background-color: #00aced;
+  color: #fff;
 }
 
-.gutters-sm>.col, .gutters-sm>[class*=col-] {
-    padding-right: 8px;
-    padding-left: 8px;
-}
-.mb-3, .my-3 {
-    margin-bottom: 1rem!important;
+.text-instagram, .hover-instagram-text:hover i, .hover-instagram a:hover i {
+  color: #b300ad;
 }
 
-.bg-gray-300 {
-    background-color: #e2e8f0;
+.bg-instagram, .btn-instagram {
+  background-color: #b300ad;
+  color: #fff;
 }
-.h-100 {
-    height: 100%!important;
+
+.text-youtube, .hover-youtube-text:hover i, .hover-youtube a:hover i {
+  color: #bd0000;
 }
-.shadow-none {
-    box-shadow: none!important;
+
+.bg-youtube, .btn-youtube {
+  background-color: #bd0000;
+  color: #fff;
 }
-.my-card
-{
-    position:absolute;
-    left:40%;
-    top:-20px;
-    border-radius:50%;
+
+.text-gplus, .hover-gplus-text:hover i, .hover-gplus a:hover i {
+  color: #eb5e4c;
+}
+
+.bg-gplus, .btn-gplus {
+  background-color: #eb5e4c;
+  color: #fff;
+}
+
+.text-vimeo, .hover-vimeo-text:hover i, .hover-vimeo a:hover i {
+  color: #35c6ea;
+}
+
+.bg-vimeo, .btn-vimeo {
+  background-color: #35c6ea;
+  color: #fff;
+}
+
+.text-envelope, .hover-envelope-text:hover i, .hover-envelope a:hover i {
+  color: #faa33d;
+}
+
+.bg-envelope, .btn-envelope {
+  background-color: #faa33d;
+  color: #fff;
+}
+
+.text-linkedin, .hover-linkedin-text:hover i, .hover-linkedin a:hover i {
+  color: #6697ff;
+}
+
+.bg-linkedin, .btn-linkedin {
+  background-color: #6697ff;
+  color: #fff;
+}
+
+.text-telegram, .hover-telegram-text:hover i, .hover-telegram a:hover i {
+  color: #30a8dc;
+}
+
+.bg-telegram, .btn-telegram {
+  background-color: #30a8dc;
+  color: #fff;
+}
+
+.text-pinterest, .hover-pinterest-text:hover i, .hover-pinterest a:hover i {
+  color: #bd081b;
+}
+
+.bg-pinterest, .btn-pinterest {
+  background-color: #bd081b;
+  color: #fff;
+}
+
+.black a {
+  color: #000;
+}
+
+.post-content ul {
+  color: #474b5f;
+}
+
+.white a {
+  color: #fff;
+}
+.sidebar-item.active, .sidebar-item:hover {
+  background-color: #fff;
+  border: 1px solid #e6e7e9;
+  border-right: 0;
+  margin-right: -1px;
+}
+
+.sidebar-menu {
+  border-bottom: 1px solid #e6e7e9;
+  border-top: 1px solid #e6e7e9;
+  border-right: 1px solid #e6e7e9;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+  background-color: #f4f4f4;
+}
+
+.sidebar-item {
+  position: relative;
+  display: block;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid transparent;
+}
+
+.sidebar-item.active:hover {
+  background-color: #fff;
+}
+
+.card .icon-big {
+  font-size: 3rem;
+}
+
+.card .icon-big .notif {
+  position: absolute;
+  min-width: 25px;
+  border-radius: 5rem;
+  font-size: 1rem;
+  background: #dc3545;
+  color: #fff;
+}
+
+.card .numbers {
+  text-align: right;
+}
+
+.card .numbers p {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.card .footer {
+  padding: 0;
+  line-height: 30px;
+}
+
+.side-notif {
+  padding-left: 7px;
+  padding-right: 7px;
+  font-size: 0.8rem;
+  border-radius: 5rem;
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.statistics li {
+  padding: 0.25rem 0;
+}
+
+.member-item:hover .card {
+  background-color: #f4f4f4;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f4f4f4;
+}
+
+@media (max-width: 767.98px) {
+  .sidebar-item.active, .sidebar-item:hover {
+    border-right: 1px solid #e6e7e9;
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+  }
 }
 </style>

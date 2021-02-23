@@ -54,7 +54,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="sidebar-item d-flex justify-content-between align-items-center" href="https://bootstrap.news/bootstrap-4-template-news-portal-magazine/">
+                            <a class="sidebar-item d-flex justify-content-between align-items-center" href="">
                                 Refferals
                                 <span class="side-notif" title="1 new comment">{{refferalMoney}}</span>
                                 <span class="fa fa-rss"></span>
@@ -74,14 +74,14 @@
                             </a>
                         </li>
                         <li>
-                            <a class="sidebar-item d-flex justify-content-between align-items-center" href="https://bootstrap.news/bootstrap-4-template-news-portal-magazine/">
+                            <a class="sidebar-item d-flex justify-content-between align-items-center">
                                 Tokens
                                 <span class="side-notif" title="1 new comment">{{shares}}</span>
                                 <span class="fa fa-database" aria-hidden="true" ></span>
                             </a>
                         </li>
                         <li>
-                            <a class="sidebar-item d-flex justify-content-between align-items-center" href="https://bootstrap.news/bootstrap-4-template-news-portal-magazine/">
+                            <a class="sidebar-item d-flex justify-content-between align-items-center">
                                 Setting
                                 <span class="fas fa-cog"></span>
                             </a>

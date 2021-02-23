@@ -42,18 +42,6 @@
                     <!--sidebar menu-->
                     <ul class="list-unstyled sidebar-menu pl-md-2 pr-md-0">
                         <li>
-                            <a class="sidebar-item active d-flex justify-content-between align-items-center" href="https://bootstrap.news/bootstrap-4-template-news-portal-magazine/">
-                                Dashboard
-                                <span class="fas fa-tachometer-alt"></span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="sidebar-item d-flex justify-content-between align-items-center" href="https://bootstrap.news/bootstrap-4-template-news-portal-magazine/">
-                                Profile
-                                <span class="fas fa-user"></span>
-                            </a>
-                        </li>
-                        <li>
                             <a class="sidebar-item d-flex justify-content-between align-items-center" href="">
                                 Refferals
                                 <span class="side-notif" title="1 new comment">{{refferalMoney}}</span>
@@ -63,7 +51,6 @@
                         <li>
                             <a class="sidebar-item d-flex justify-content-between align-items-center" href="https://chat.whatsapp.com/HU3wvCqjXmJ0J0OMSPndyJ">
                                 whatsapp
-                                <span class="side-notif" title="1 new comment">1</span>
                                 <i class="fa fa-envelope" aria-hidden="true"></i>
                             </a>
                         </li>
@@ -82,8 +69,9 @@
                         </li>
                         <li>
                             <a class="sidebar-item d-flex justify-content-between align-items-center">
-                                Setting
-                                <span class="fas fa-cog"></span>
+                                Availableshares
+                                <span class="fa fa-balance-scale"></span>
+                                <span class="side-notif" title="1 new comment">{{availableshares}}</span>
                             </a>
                         </li>
                         <li>
@@ -231,7 +219,6 @@
                                                         <div class="row">
                                                             <div class="col-6 d-flex justify-content-center align-items-center">
                                                                 <div class="icon-big text-twitter text-center" title="1 new messages">
-                                                                    <div class="notif">1</div>
                                                                     <i class="fa fa-suitcase  "></i>
                                                                 </div>
                                                             </div>

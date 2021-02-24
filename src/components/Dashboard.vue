@@ -165,7 +165,7 @@
                                                             </div>
                                                             <div class="col-6 d-flex justify-content-center align-items-center">
                                                                 <div class="numbers">
-                                                                    <p>Invite Friends</p>
+                                                                    <a data-toggle="modal" data-target="#exampleModalCenter">Invite Friends</a>
                     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                    <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
@@ -176,7 +176,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <a id = "link" class=" text text-success" data-toggle="modal" data-target="#exampleModalCenter">{{invitelink}}</a>
+        <a id = "link" class=" text text-success" >{{invitelink}}</a>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

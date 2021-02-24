@@ -72,20 +72,6 @@
                   />
                 </div>
               </div>
-              <div class="form-group row">
-                <label for="phone" class="col-md-4 col-form-label text-md-right">RefferalCode</label>
-
-                <div class="col-md-6">
-                  <input
-                    id="refferalcode"
-                    type="text"
-                    class="form-control"
-                    name="phone"
-                    placeholder="https:hustlebidders.netlify.app"
-                    v-model="form.refferalcode"
-                  />
-                </div>
-              </div>
               <div class="form-group row mb-0">
                 <div class="col-md-8 offset-md-4">
                   <button type="submit" class="btn btn-primary">Register</button>
@@ -108,10 +94,26 @@ export default {
         password: '',
         phone: '',
         name: '',
-        refferalcode: ''
+        refferalcode: '',
+        refereename: ''
       },
       error: null
     }
+  },
+  mounted: function () {
+    const url = require('url')
+    let urlObject = url.parse(window.location.href, true)
+    let queryData = urlObject.query
+    let referee = queryData.email
+    firebase.firestore.collection('users').doc(referee).get().then(snapshot => {
+      this.refereename = this.snapshot.data().username
+    })
+    this.$swal(this.refereename + 'reffered you')
+    firebase.firestore().collection('users').doc(referee).collection('invitees').add({
+      username: this.form.name,
+      email: this.form.email,
+      phone: this.form.phone
+    })
   },
   methods: {
     submit () {
@@ -126,7 +128,7 @@ export default {
           })
           user.sendEmailVerification()
           const url = require('url')
-          let urlObject = url.parse(this.form.refferalcode, true)
+          let urlObject = url.parse(window.location.href, true)
           let queryData = urlObject.query
           let referee = queryData.email
           this.$swal('Account created successfully please check your email to verify your account....')

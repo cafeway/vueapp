@@ -153,7 +153,7 @@
                                             </a>
                                         </div>
                                         <div class="col-lg-4 col-sm-6">
-                                            <a class="member-item" data-toggle="modal" data-target="#exampleModalCenter">
+                                            <a class="member-item" >
                                                 <div class="card mb-2 mb-md-5 py-3">
                                                     <div class="content">
                                                         <div class="row">
@@ -161,11 +161,12 @@
                                                                 <div class="icon-big text-info text-center" title="1 new comment">
                                                                     <div class="notif">1</div>
                                                                     <i class="fa fa-user-md"></i>
+                                                                    
                                                                 </div>
                                                             </div>
                                                             <div class="col-6 d-flex justify-content-center align-items-center">
                                                                 <div class="numbers">
-                                                                    <p>Invite Friends</p>
+                                                                    <a href="" data-toggle="modal" data-target="#exampleModalCenter">Invite Buddies</a>
                     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                    <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
@@ -176,7 +177,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p id = "link" class=" text text-success">{{invitelink}}</p>
+        <p id = "link" class=" text text-success">https://hustlebidders.netlify.com/register</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

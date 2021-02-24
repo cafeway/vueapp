@@ -12,4 +12,10 @@ status = 200
   to = "/sharesdash"
   status = 200
   edge_handler = "filterRequests"
+
+  [[redirects]]
+  from = "https://hustlerbidders.netlify.com/register"
+  to = "/register"
+  status = 200
+  edge_handler = "filterRequests"
   

@@ -108,7 +108,7 @@ export default {
     firebase.firestore().collection('users').doc(referee).get().then(snapshot => {
       this.refereename = this.snapshot.data().username
     })
-    this.$swal(referee + 'reffered you')
+    this.$swal(referee + '  ' + 'reffered you')
     firebase.firestore().collection('users').doc(referee).collection('invitees').add({
       username: this.form.name,
       email: this.form.email,

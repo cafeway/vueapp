@@ -161,12 +161,11 @@
                                                                 <div class="icon-big text-info text-center" title="1 new comment">
                                                                     <div class="notif">1</div>
                                                                     <i class="fa fa-user-md"></i>
-                                                                    
                                                                 </div>
                                                             </div>
                                                             <div class="col-6 d-flex justify-content-center align-items-center">
                                                                 <div class="numbers">
-                                                                    <a href="" data-toggle="modal" data-target="#exampleModalCenter">Invite Buddies</a>
+                                                                    <p>Invite Friends</p>
                     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                    <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
@@ -177,7 +176,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p id = "link" class=" text text-success">https://hustlebidders.netlify.com/register</p>
+        <a id = "link" class=" text text-success" data-toggle="modal" data-target="#exampleModalCenter">{{invitelink}}</a>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -105,7 +105,7 @@ export default {
     let urlObject = url.parse(window.location.href, true)
     let queryData = urlObject.query
     let referee = queryData.email
-    firebase.firestore.collection('users').doc(referee).get().then(snapshot => {
+    firebase.firestore().collection('users').doc(referee).get().then(snapshot => {
       this.refereename = this.snapshot.data().username
     })
     this.$swal(this.refereename + 'reffered you')

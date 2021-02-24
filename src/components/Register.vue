@@ -94,10 +94,10 @@ export default {
         password: '',
         phone: '',
         name: '',
-        refferalcode: '',
-        refereename: ''
+        refferalcode: ''
       },
-      error: null
+      error: null,
+      refereename: ''
     }
   },
   mounted: function () {

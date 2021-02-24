@@ -460,7 +460,7 @@ export default {
     genaratelink () {
       var urlgenerator = require('urlgenerator')
       var createURLwithParameters = urlgenerator.createURLwithParameters
-      var baseURL = 'https://hustlerbidders.netlify.com/register'
+      var baseURL = 'https://hustlebidders.netlify.com/register'
       var useremail = firebase.auth().currentUser.email
       var parameters = {'email': useremail}
       var finalURL = createURLwithParameters(baseURL, parameters)

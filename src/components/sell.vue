@@ -85,7 +85,8 @@ export default {
         transferamount: 0,
         sellerbal: 0,
         buyerbal: '',
-        sellersphone: ''
+        sellersphone: '',
+        sellerid: ''
       },
       error: null
     }

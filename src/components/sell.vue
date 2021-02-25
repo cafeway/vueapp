@@ -147,7 +147,7 @@ export default {
           sellerid: this.sellerid,
           amount: this.form.transferamount,
           status: 'transfered',
-          paired: true,
+          paired: false,
           transferdate: '',
           sold: true,
           matureDate: maturedate

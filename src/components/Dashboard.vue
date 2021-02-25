@@ -335,6 +335,7 @@ export default {
       shares: 0,
       refferalMoney: 0,
       date: '',
+      activated: null,
       form: {
         amount: 0,
         days: 0,
@@ -347,13 +348,11 @@ export default {
   created: function () {
   },
   updated: function () {
-    this.countdown()
     console.log('updated')
     var db = firebase.firestore()
     var user = firebase.auth().currentUser
-    db.collection('users').doc(this.user.data.email).collection('messages').get().then(snapshot => {
-      this.inbox.push(snapshot.data())
-      this.messages = snapshot.size
+    db.collection('users').doc(this.user.data.email).get().then(snapshot => {
+      this.activated = snapshot.data().activated
     })
     db.collection('users').doc(user.email).get().then(snapshot => {
       const doc = snapshot.data()
@@ -399,7 +398,7 @@ export default {
         let date = new Date()
         console.log(date.getDate())
         var data = snapshot.data()
-        if (data.total >= 0) {
+        if (data.total >= 0 && this.activated === true) {
           let residue = data.total - this.form.amount
           db2.collection('bids').add({
             dob: Date(),
@@ -426,7 +425,7 @@ export default {
           this.$swal('you bought ' + '  ' + this.form.amount + '  ' + ' Buy to activate')
           this.$router.push('/sharesdash')
         } else {
-          this.$swal('The shares have run out....try again later')
+          this.$swal('Please activate your account')
         }
       })
     },

@@ -50,7 +50,8 @@
                                             <td><a href="#">{{running.amount}}</a></td>
                                             <td>{{running.status}}</td>
                                             <td>{{running.sellerid}}</td>
-                                            <td><button class="btn btn-primary">confirm</button></td>
+                                            <td>{{running.paired}}
+                                            <td><button class="btn btn-primary" v-on:click="confirmbuy(running.buyeremail)">confirm</button></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -62,6 +63,7 @@
                                             <th>Amount</th>
                                             <th>Date</th>
                                             <th>interest</th>
+                                            <th>Paired</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -154,6 +156,12 @@ export default {
     }
   },
   methods: {
+    confirmbuy: function (mail) {
+      var db = firebase.firestore()
+      db.collection('bid').where('sold', '==', false, 'buyeremail', '==', mail).update({
+        paired: true
+      })
+    },
     addDays: function (date, days) {
       const copy = new Date(date)
       copy.setDate(date.getDate() + days)
@@ -187,7 +195,7 @@ export default {
         this.pending.push(doc.data())
       })
     })
-    db.collection('bids').where('status', '==', 'transfered', 'paired', '==', 'true', 'sold', '==', 'yes').get().then(snapshot => {
+    db.collection('bids').where('sold', '==', false).get().then(snapshot => {
       snapshot.forEach(doc => {
         this.running.push(doc.data())
       })

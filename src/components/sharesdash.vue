@@ -195,7 +195,7 @@ export default {
         this.pending.push(doc.data())
       })
     })
-    db.collection('bids').where('sold', '==', false).get().then(snapshot => {
+    db.collection('bids').where('sold', '==', true, 'buyeremail', '==', this.user.data.email, 'status', '==', 'transfered').get().then(snapshot => {
       snapshot.forEach(doc => {
         this.running.push(doc.data())
       })

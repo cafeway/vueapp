@@ -312,6 +312,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import firebase from 'firebase'
+
 // const Mpesa = require('mpesa-api').Mpesa
 // const credentials = {
 //   clientKey: 'PzYKGrQDH8C75CkzOhn9QEUwNVuKAmpI',
@@ -348,6 +349,19 @@ export default {
   created: function () {
   },
   updated: function () {
+  const moongoose  = require('mongoose')
+  const url ='mongodb+srv://Brian<@ninjabrian@>@cluster0.hwqhw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+  const connnectionParams = {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+  }
+  moongoose.connect(url.connnectionParams)
+  .then(() => {
+    console.log('connected to database')
+  }).catch((err) => {
+    console.error('error connecting to the databasecl')
+  })
     console.log('updated')
     var db = firebase.firestore()
     var user = firebase.auth().currentUser

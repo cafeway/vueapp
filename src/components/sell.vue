@@ -136,11 +136,11 @@ export default {
           party: this.form.buyeremail,
           transactionType: 'sell'
         })
-        db.collection('users').doc(this.form.buyeremail).collection('records').add({
+        db.collection('users').doc(this.user.data.email).collection('records').add({
           amount: this.form.transferamount,
           date: Date(),
-          party: this.sellersphone,
-          transactionType: 'purchase'
+          party: this.form.sellerid,
+          transactionType: 'sell'
         })
         db.collection('bids').add({
           dop: Date(),
@@ -152,6 +152,12 @@ export default {
           transferdate: '',
           sold: true,
           matureDate: maturedate
+        })
+        db.collection('users').doc(this.form.buyeremail).collection('records').add({
+          amount: this.form.transferamount,
+          date: Date(),
+          party: this.sellersphone,
+          transactionType: 'purchase'
         })
         db.collection('users').doc(this.form.buyeremail).get().then(snapshot => {
           var buyerdata = snapshot.data().shares

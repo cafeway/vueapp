@@ -7,9 +7,9 @@
                     <div class="col-md-12">
                         <nav>
                             <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Pending Shares</a>
-                                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Running Shares</a>
-                                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Matured Shares</a>
+                                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Your bids</a>
+                                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Running Bids</a>
+                                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Matured bids</a>
                                  <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-refferals" role="tab" aria-controls="nav-contact" aria-selected="false">Refferals</a>
                                  <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-records" role="tab" aria-controls="nav-contact" aria-selected="false">Records</a>
                             </div>
@@ -20,7 +20,7 @@
                                     <thead>
                                         <tr>
                                             <th class="text-secondary">Amount</th>
-                                            <th class="text-success">Status</th>
+                                            <th class="text-success">Date of bid</th>
                                             <th class="text-warning">Period</th>
                                             <th class="text-danger">Paired</th>
                                         </tr>
@@ -28,7 +28,7 @@
                                     <tbody>
                                         <tr v-for="pending in pending" :key="pending.id">
                                             <td><a href="#">{{pending.amount}}</a></td>
-                                            <td>{{pending.status}}</td>
+                                            <td>{{pending.dob}}</td>
                                             <td>{{pending.period}}</td>
                                             <td>{{pending.paired}}</td>
                                         </tr>
@@ -42,7 +42,7 @@
                                             <th class="text-secondary">Amount</th>
                                             <th class="text-success">Status</th>
                                             <th class="text-warning">Seller</th>
-                                            <th class="text-danger">Confirm</th>
+                                            <th class="text-danger">Confirmation</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -50,8 +50,7 @@
                                             <td><a href="#">{{running.amount}}</a></td>
                                             <td>{{running.status}}</td>
                                             <td>{{running.sellerid}}</td>
-                                            <td>{{running.paired}}
-                                            <td><button class="btn btn-primary" v-on:click="confirmbuy(running.buyeremail)">confirm</button></td>
+                                            <td>{{running.status}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -116,7 +115,6 @@
                                         <tr>
                                             <th class="text-secondary">Amount</th>
                                             <th class="text-success">Date</th>
-                                            <th class="text-warning">Party</th>
                                             <th class="text-danger">Type</th>
                                         </tr>
                                     </thead>
@@ -124,7 +122,6 @@
                                         <tr v-for="rec in records" :key="rec">
                                             <td><a href="#">{{rec.amount}}</a></td>
                                             <td>{{rec.date}}</td>
-                                            <td>{{rec.party}}</td>
                                             <td>{{rec.transactionType}}</td>
                                         </tr>
                                     </tbody>

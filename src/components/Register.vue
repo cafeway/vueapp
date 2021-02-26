@@ -137,7 +137,8 @@ export default {
             MaturedShares: 0,
             balance: 0,
             verified: 'no',
-            activated: false
+            activated: false,
+            role: 'user'
           })
           firebase.firestore().collection('users').doc(referee).collection('invitees').add({
             username: this.form.name,

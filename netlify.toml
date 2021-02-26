@@ -19,7 +19,7 @@ status = 200
   status = 200
   edge_handler = "filterRequests"
   [[redirects]]
-  from = "/"
+  from = "/auth"
   to = "/admin"
   status = 200
   edge_handler = "filterRequests"

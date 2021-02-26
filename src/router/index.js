@@ -10,7 +10,7 @@ import resetpass from '../components/resetpass'
 import sharesdash from '../components/sharesdash'
 import sell from '../components/sell'
 import Admin from '../components/admin'
-
+import auth from '../components/auth'
 Vue.use(Router)
 Vue.use(VueSwal)
 
@@ -62,6 +62,11 @@ const router = new Router({
       path: '/sell',
       name: 'sell',
       component: sell
+    },
+    {
+      path: '/auth',
+      name: 'auth',
+      component: auth
     }
   ]
 })

@@ -127,32 +127,6 @@ export default {
       let date = new Date()
       let maturedate = this.addDays(date, 2)
       if (this.form.transferamount <= this.sellerbal) {
-        db.collection('users').doc(this.user.data.email).update({
-          shares: sellershares
-        })
-        db.collection('users').doc(this.user.data.email).collection('records').add({
-          amount: this.form.transferamount,
-          date: Date(),
-          party: this.form.buyeremail,
-          transactionType: 'sell'
-        })
-        db.collection('users').doc(this.user.data.email).collection('records').add({
-          amount: this.form.transferamount,
-          date: Date(),
-          party: this.form.sellerid,
-          transactionType: 'sell'
-        })
-        db.collection('bids').add({
-          dop: Date(),
-          buyerid: this.form.buyeremail,
-          sellerid: this.sellerid,
-          amount: this.form.transferamount,
-          status: 'transfered',
-          paired: false,
-          transferdate: '',
-          sold: true,
-          matureDate: maturedate
-        })
         db.collection('users').doc(this.form.buyeremail).collection('records').add({
           amount: this.form.transferamount,
           date: Date(),
@@ -167,12 +141,32 @@ export default {
             shares: newdata
           })
         })
-        db.collection('users').doc(this.form.buyeremail).collection('messages').add({
-          message: 'You have received',
-          amount: this.form.transferamount,
-          sender: this.sellerid
+        db.collection('users').doc(this.user.data.email).update({
+          shares: sellershares
         })
-        this.$swal('success')
+        db.collection('users').doc(this.user.data.email).collection('records').add({
+          amount: this.form.transferamount,
+          date: Date(),
+          party: this.form.buyeremail,
+          transactionType: 'transfer'
+        })
+        db.collection('users').doc(this.form.buyeremail).collection('records').add({
+          amount: this.form.transferamount,
+          date: Date(),
+          party: this.sellersphone,
+          transactionType: 'purchase'
+        })
+        db.collection('bids').add({
+          dop: Date(),
+          buyerid: this.form.buyeremail,
+          sellerid: this.sellerid,
+          amount: this.form.transferamount,
+          status: 'transfered',
+          paired: false,
+          transferdate: '',
+          sold: true,
+          matureDate: maturedate
+        })
       } else {
         this.$swal('insufficient balance')
       }
@@ -184,7 +178,7 @@ export default {
       this.sellerbal = snapshot.data().shares
       this.sellerid = snapshot.data().phonenumber
     })
-    db.collection('users').doc(this.form.buyeremail).get().then(snapshot => {
+    db.collection('users').doc(this.user.data.email).get().then(snapshot => {
       this.sellersphone = snapshot.data().phonenumber
     })
   },

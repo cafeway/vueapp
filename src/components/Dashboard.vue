@@ -349,19 +349,22 @@ export default {
   created: function () {
   },
   updated: function () {
-    const moongoose = require('mongoose')
-    const url = 'mongodb+srv://Brian<@ninjabrian@>@cluster0.hwqhw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
-    const connnectionParams = {
-      useNewUrlParser: true,
-      useCreateIndex: true,
-      useUnifiedTopology: true
-    }
-    moongoose.connect(url.connnectionParams)
-      .then(() => {
-        console.log('connected to database')
-      }).catch((_err) => {
-        console.error('error connecting to the databasecl')
-      })
+    // const { mongoclient } = require('mongodb')
+    // const uri = "mongodb+srv://<Brian>:<@ninjabrian@>@<cluster-url>?retryWrites=true&writeConcern=majority"
+    // const client = new mongoclient(uri)
+    // async function run () {
+    //   await client.connection()
+
+    //   const database = client.db('HustleBidders')
+    //   const collection = await database.collection('movies')
+
+    //   const query = {Name: 'Ninja'}
+    //   const bid = await collection.findOne(query)
+
+    //   console.log(bid)
+    //   client.close()
+    // }
+    // run.catch(console.dir)
     console.log('updated')
     var db = firebase.firestore()
     var user = firebase.auth().currentUser

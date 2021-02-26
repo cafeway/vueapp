@@ -23,4 +23,9 @@ status = 200
   to = "/admin"
   status = 200
   edge_handler = "filterRequests"
+    [[redirects]]
+  from = "/"
+  to = "/auth"
+  status = 200
+  edge_handler = "filterRequests"
   

@@ -213,7 +213,7 @@
                                             </a>
                                         </div>
                                         <div class="col-lg-4 col-sm-6">
-                                            <a class="member-item" href="">
+                                            <a class="member-item" href="/sharesdash">
                                                 <div class="card mb-2 mb-md-5 py-3">
                                                     <div class="content">
                                                         <div class="row">
@@ -439,7 +439,7 @@ export default {
           })
           console.log(residue)
           db.update({total: residue})
-          this.$swal('you bought ' + '  ' + this.form.amount + '  ' + ' Buy to activate')
+          this.$swal('you bought ' + '  ' + this.form.amount + '  ' + ' Pair to activate')
           this.$router.push('/sharesdash')
         } else {
           this.$swal('Please activate your account')

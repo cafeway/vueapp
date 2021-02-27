@@ -127,6 +127,13 @@ export default {
       let date = new Date()
       let maturedate = this.addDays(date, 2)
       if (this.form.transferamount <= this.sellerbal) {
+        db.collection('users').doc(this.form.buyeremail).collection('confirmation').add({
+          amount: this.form.transferamount,
+          seller: this.form.selleremail,
+          buyer: this.form.buyeremail,
+          buyerconfirm: 'notconfirmed',
+          type: 'sell'
+        })
         db.collection('users').doc(this.form.buyeremail).collection('records').add({
           amount: this.form.transferamount,
           date: Date(),
@@ -148,13 +155,15 @@ export default {
           amount: this.form.transferamount,
           date: Date(),
           party: this.form.buyeremail,
-          transactionType: 'transfer'
+          transactionType: 'transfer',
+          confirmed: 'paired & verified'
         })
         db.collection('users').doc(this.form.buyeremail).collection('records').add({
           amount: this.form.transferamount,
           date: Date(),
           party: this.sellersphone,
-          transactionType: 'purchase'
+          transactionType: 'purchase',
+          confirmed: 'paired & verified'
         })
         db.collection('bids').add({
           dop: Date(),

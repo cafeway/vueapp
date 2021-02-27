@@ -208,12 +208,14 @@ export default {
       db.collection('users').doc(email).update({
         activated: true
       })
+      this.$swal('activated')
     },
     verifyUser: function (email) {
       let db = firebase.firestore()
       db.collection('users').doc(email).update({
         verified: 'Yes'
       })
+      this.$swal('verified')
     }
   }
 }

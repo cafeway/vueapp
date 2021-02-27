@@ -30,7 +30,7 @@
                                             <td><a href="#">{{pending.amount}}</a></td>
                                             <td>{{pending.dob}}</td>
                                             <td>{{pending.period}}</td>
-                                            <td>{{pending.paired}}</td>
+                                            <td>Paired to Till</td>
                                         </tr>
                                     </tbody>
                                 </table>

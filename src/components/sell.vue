@@ -127,12 +127,10 @@ export default {
       let date = new Date()
       let maturedate = this.addDays(date, 2)
       if (this.form.transferamount <= this.sellerbal) {
-        db.collection('users').doc(this.form.buyeremail).collection('confirmation').add({
+        db.collection('users').doc(this.form.buyeremail).collection('messages').add({
+          confirmed: 'yes',
           amount: this.form.transferamount,
-          seller: this.form.selleremail,
-          buyer: this.form.buyeremail,
-          buyerconfirm: 'notconfirmed',
-          type: 'sell'
+          from: this.sellersphone
         })
         db.collection('users').doc(this.form.buyeremail).collection('records').add({
           amount: this.form.transferamount,
@@ -176,6 +174,7 @@ export default {
           sold: true,
           matureDate: maturedate
         })
+        this.$swal('succeess')
       } else {
         this.$swal('insufficient balance')
       }

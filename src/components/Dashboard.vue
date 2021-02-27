@@ -61,6 +61,46 @@
                             </a>
                         </li>
                         <li>
+                            <a class="sidebar-item d-flex justify-content-between align-items-center" data-toggle="modal" data-target="#exampleModalLong">
+                                Messages
+                                <span class="side-notif" title="1 new comment">{{messages}}</span>
+                                <span class="fa fa-paper-plane"></span>
+                            </a>
+                        </li>
+                                   <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                       <div class="modal-content">
+                                             <div class="modal-header">
+                                               <h5 class="modal-title" id="exampleModalLongTitle">Messages</h5>
+                                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                 <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                  </div>
+                                                <div class="modal-body">
+                                                       <table class="table" cellspacing="0">
+                                                         <thead>
+                                                           <tr>
+                                                             <th class="text-secondary">Amount</th>
+                                                              <th class="text-success">Sender</th>
+                                                              <th class="text-danger">Confirmed</th>
+                                                           </tr>
+                                                          </thead>
+                                                         <tbody>
+                                                         <tr v-for="inb in inbox" :key="inb">
+                                                          <td><a href="#">{{inb.amount}}</a></td>
+                                                              <td>{{inb.sender}}</td>
+                                                                 <td>{{inb.confirmed}}</td>
+                                                           </tr>
+                                                           </tbody>
+                                                       </table>
+                                                 </div>
+                                                 <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                               </div>
+                                                </div>
+                                                    </div>
+                                                    </div>
+                        <li>
                             <a class="sidebar-item d-flex justify-content-between align-items-center">
                                 Tokens
                                 <span class="side-notif" title="1 new comment">{{shares}}</span>
@@ -337,34 +377,18 @@ export default {
       refferalMoney: 0,
       date: '',
       activated: null,
+      messages: 0,
+      inbox: [],
       form: {
         amount: 0,
         days: 0,
         sharesOnSale: 0
-      },
-      inbox: '',
-      messages: 0
+      }
     }
   },
   created: function () {
   },
   updated: function () {
-    // const { mongoclient } = require('mongodb')
-    // const uri = "mongodb+srv://<Brian>:<@ninjabrian@>@<cluster-url>?retryWrites=true&writeConcern=majority"
-    // const client = new mongoclient(uri)
-    // async function run () {
-    //   await client.connection()
-
-    //   const database = client.db('HustleBidders')
-    //   const collection = await database.collection('movies')
-
-    //   const query = {Name: 'Ninja'}
-    //   const bid = await collection.findOne(query)
-
-    //   console.log(bid)
-    //   client.close()
-    // }
-    // run.catch(console.dir)
     console.log('updated')
     var db = firebase.firestore()
     var user = firebase.auth().currentUser
@@ -384,8 +408,17 @@ export default {
     db.collection('users').doc(user.email).collection('invitees').get().then(snapshot => {
       this.refferalMoney = snapshot.size * 20
     })
+    db.collection('users').doc(this.user.data.email).collection('messages').where('read', '==', false).get().then(snapshot => {
+      this.messages = snapshot.size
+    })
   },
   mounted: function () {
+    var db = firebase.firestore()
+    db.collection('users').doc(this.user.data.email).collection('messages').get().then(snapshot => {
+      snapshot.forEach(doc => {
+        this.inbox.push(doc.data())
+      })
+    })
     let externalScript = document.createElement('script')
     externalScript.setAttribute('src', 'https://use.fontawesome.com/1d87a0aaab.js')
     document.head.appendChild(externalScript)

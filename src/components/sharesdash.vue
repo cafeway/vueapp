@@ -116,7 +116,6 @@
                                             <th class="text-secondary">Amount</th>
                                             <th class="text-success">Date</th>
                                             <th class="text-danger">Type</th>
-                                            <th class="text-waring">Confirmation</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -124,7 +123,6 @@
                                             <td><a href="#">{{rec.amount}}</a></td>
                                             <td>{{rec.date}}</td>
                                             <td>{{rec.transactionType}}</td>
-                                            <td>{{rec.confirmed}}</td>
                                         </tr>
                                     </tbody>
                                 </table>

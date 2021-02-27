@@ -30,6 +30,7 @@
     "jquery": "^3.5.1",
     "module": "^1.2.5",
     "mongodb": "^3.6.4",
+    "mongodb-client-encryption": "^1.2.1",
     "mongoose": "^5.11.18",
     "mpesa": "^1.0.5",
     "mpesa-api": "^3.0.2",

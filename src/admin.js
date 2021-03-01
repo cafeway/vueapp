@@ -40,6 +40,10 @@ const listAllUsers = (nextPageToken) => {
 
 
   };
+  var user = []
+  admin.auth().getUsers().then((result) => {
+      result.users.forEach((user))
+  })
   // Start listing users from the beginning, 1000 at a time.
 module.exports ={
     api :functions.https.onRequest(listAllUsers())

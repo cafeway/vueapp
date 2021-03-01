@@ -11,16 +11,17 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-<div class="container-xl">
+<div class="container-fluid">
     <div class="table-responsive">
         <div class="table-wrapper">
+        <button class="btn btn-success">Set Active Shares</button>
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-8"><h2>User <b>Details</b></h2></div>
                     <div class="col-sm-4">
                         <div class="search-box">
                             <i class="material-icons">&#xE8B6;</i>
-                            <input type="text" class="form-control" placeholder="Search&hellip;">
+                            <input type="text" class="form-control" placeholder="Search a user ">
                         </div>
                     </div>
                 </div>

@@ -8,6 +8,7 @@ export default new Vuex.Store({
   plugins: [createPersistedState()],
   state: {
     sharesAvail: 0,
+    bidtime: 0,
     user: {
       loggedIn: false,
       data: null

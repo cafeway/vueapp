@@ -10,7 +10,7 @@
                                 <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Your bids</a>
                                 <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Running Bids</a>
                                 <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Matured bids</a>
-                                 <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-refferals" role="tab" aria-controls="nav-contact" aria-selected="false">Refferals</a>
+                                 <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-refferals" role="tab" aria-controls="nav-contact" aria-selected="false">FindPairs</a>
                                  <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-records" role="tab" aria-controls="nav-contact" aria-selected="false">Records</a>
                             </div>
                         </nav>
@@ -74,17 +74,17 @@
                                     <thead>
                                         <tr>
                                             <th class="text-secondary">UserName</th>
-                                            <th class="text-success">Email</th>
-                                            <th class="text-warning">Phone</th>
-                                            <th class="text-danger">Commission</th>
+                                            <th class="text-success">Phone</th>
+                                            <th class="text-warning">Amount</th>
+                                            <th class="text-danger">Pair</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="ref in refferals" :key="ref">
-                                            <td><a href="#">{{ref.username}}</a></td>
-                                            <td>{{ref.email}}</td>
-                                            <td>{{ref.phone}}</td>
-                                            <td>20ksh</td>
+                                        <tr v-for="sel in sellers" :key="sel">
+                                            <td><a href="#">{{sel.username}}</a></td>
+                                            <td>{{sel.phonenumber}}</td>
+                                            <td>{{sel.shares}}</td>
+                                            <td><button  type="button" v-on:click="sendPair(sel.email)" class="btn btn-warning">Send Pair Request</button></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -149,10 +149,23 @@ export default {
       running: [],
       matured: [],
       refferals: [],
-      records: []
+      records: [],
+      sellers: [],
+      pairRequestSendersNumber: 0,
+      sellerEmail: ''
     }
   },
   methods: {
+    sendPair: function (email) {
+      this.$swal('pair request sent')
+      let db = firebase.firestore()
+      db.collection('users').doc(email).collection('messages').add({
+        message: 'You Have sent A Pair Request',
+        buyer: this.pairRequestSendersNumber,
+        buyerwalletAddress: this.user.data.email
+      })
+      console.log(email)
+    },
     confirmbuy: function (mail) {
       var db = firebase.firestore()
       db.collection('bid').where('sold', '==', false, 'buyeremail', '==', mail).update({
@@ -187,6 +200,14 @@ export default {
   },
   mounted: function () {
     let db = firebase.firestore()
+    db.collection('users').doc(this.user.data.email).get().then(snapshot => {
+      this.pairRequestSendersNumber = snapshot.data().phonenumber
+    })
+    db.collection('users').where('MaturedShares', '>', 0).get().then(snapshot => {
+      snapshot.forEach(doc => {
+        this.sellers.push(doc.data())
+      })
+    })
     db.collection('bids').where('buyeremail', '==', this.user.data.email, 'paired', '==', false, 'sold', '==', 'no').get().then(snapshot => {
       snapshot.forEach(doc => {
         this.pending.push(doc.data())

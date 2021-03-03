@@ -11,20 +11,63 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-<div class="container-fluid">
+<div class="container-xl">
     <div class="table-responsive">
         <div class="table-wrapper">
-        <button class="btn btn-success">Set Active Shares</button>
             <div class="table-title">
-                <div class="row">
-                    <div class="col-sm-8"><h2>User <b>Details</b></h2></div>
-                    <div class="col-sm-4">
-                        <div class="search-box">
-                            <i class="material-icons">&#xE8B6;</i>
-                            <input type="text" class="form-control" placeholder="Search a user ">
-                        </div>
-                    </div>
+               <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" >Admin</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal">SetShares <span class="sr-only">(current)</span></a>
+      </li>
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group row">
+                <label for="password" class="col-md-4 col-form-label text-md-right">amount</label>
+
+                <div class="col-md-6">
+                  <input
+                    id="transferamount"
+                    type="number"
+                    class="form-control"
+                    name="password"
+                    required
+                    v-model="form.amount"
+                  />
                 </div>
+              </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" v-on:click="setshares" data-dismiss="modal">Set Shares</button>
+      </div>
+    </div>
+  </div>
+</div>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Features</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Pricing</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+  </div>
+</nav>
             </div>
             <table class="table table-striped table-hover table-bordered">
                 <thead>
@@ -192,11 +235,18 @@ import firebase from 'firebase'
 export default {
   data () {
     return {
-      users: []
+      users: [],
+      availableshares: 0,
+      form: {
+        amount: ''
+      }
     }
   },
   mounted: function () {
     var db = firebase.firestore()
+    db.collection('shares').doc('available').get().then(snapshot => {
+      this.availableshares = snapshot.data().total
+    })
     db.collection('users').get().then(snapshot => {
       snapshot.forEach(doc => {
         this.users.push(doc.data())
@@ -217,6 +267,13 @@ export default {
         verified: 'Yes'
       })
       this.$swal('verified')
+    },
+    setshares: function (event) {
+      alert(this.form.amount)
+      let db = firebase.firestore()
+      db.collection('shares').doc('available').update({
+        total: parseFloat(this.form.amount)
+      })
     }
   }
 }

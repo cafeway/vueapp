@@ -14,10 +14,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="ml-auto navbar-nav text-uppercase">
                     <li class="nav-item active">
-                        <a class="nav-link p-3" href="#">Zero Risks!<span class="sr-only">(current)</span></a>
+                        <a class=" nav-link p-3" href="#"><span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link p-3" href="">About us</a>
+                        <a class=" text-danger nav-link p-3" id="timer" href="">About us</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link p-3" href="">FAQ</a>
@@ -26,7 +26,7 @@
                         <a class="nav-link p-3" href="">Contact Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link p-3" href="">Sign Out</a>
+                        <a class="nav-link p-3" href="/">Sign Out</a>
                     </li>
                 </ul>
             </div>
@@ -42,11 +42,44 @@
                     <!--sidebar menu-->
                     <ul class="list-unstyled sidebar-menu pl-md-2 pr-md-0">
                         <li>
-                            <a class="sidebar-item d-flex justify-content-between align-items-center" href="">
+                            <a class="sidebar-item d-flex justify-content-between align-items-center" href="" data-toggle="modal" data-target="#refferal">
                                 Refferals
                                 <span class="side-notif" title="1 new comment">{{refferalMoney}}</span>
                                 <span class="fa fa-rss"></span>
                             </a>
+                            <div class="modal fade" id="refferal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                       <div class="modal-content">
+                                             <div class="modal-header">
+                                               <h5 class="modal-title" id="exampleModalLongTitle">Your invitees</h5>
+                                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                 <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                  </div>
+                                                <div class="modal-body">
+                                                       <table class="table" cellspacing="0">
+                                                         <thead>
+                                                           <tr>
+                                                             <th class="text-secondary">UserName</th>
+                                                              <th class="text-success">Phone</th>
+                                                              <th class="text-danger">Email</th>
+                                                           </tr>
+                                                          </thead>
+                                                         <tbody>
+                                                         <tr v-for="inv in invitees" :key="inv">
+                                                          <td><a href="#">{{inv.username}}</a></td>
+                                                              <td>{{inv.phone}}</td>
+                                                                 <td>{{inv.email}}</td>
+                                                           </tr>
+                                                           </tbody>
+                                                       </table>
+                                                 </div>
+                                                 <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                               </div>
+                                                </div>
+                                                    </div>
+                                                    </div>
                         </li>
                         <li>
                             <a class="sidebar-item d-flex justify-content-between align-items-center" href="https://chat.whatsapp.com/HU3wvCqjXmJ0J0OMSPndyJ">
@@ -82,14 +115,14 @@
                                                            <tr>
                                                              <th class="text-secondary">Amount</th>
                                                               <th class="text-success">Sender</th>
-                                                              <th class="text-danger">Confirmed</th>
+                                                              <th class="text-danger">Message</th>
                                                            </tr>
                                                           </thead>
                                                          <tbody>
                                                          <tr v-for="inb in inbox" :key="inb">
                                                           <td><a href="#">{{inb.amount}}</a></td>
                                                               <td>{{inb.sender}}</td>
-                                                                 <td>{{inb.confirmed}}</td>
+                                                                 <td>{{inb.message}}</td>
                                                            </tr>
                                                            </tbody>
                                                        </table>
@@ -111,8 +144,43 @@
                             <a class="sidebar-item d-flex justify-content-between align-items-center">
                                 Availableshares
                                 <span class="side-notif" title="1 new comment">{{availableshares}}</span>
-                                <span class="fa fa-balance-scale"></span>
                             </a>
+                        </li>
+                        <li v-if="this.user.data.email == this.admin1| this.user.data.email == this.admin2">
+                            <a class="sidebar-item d-flex justify-content-between align-items-center" data-toggle="modal" data-target="#exampleModalCenter">
+                                SetBidTimer
+                                <i class="fa fa-clock-o" aria-hidden="true"></i>
+                            </a>
+                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Set bidding Timer</h5>
+                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="form-group row">
+                                  <label for="password" class="col-md-4 col-form-label text-md-right">amount</label>
+                                  <div class="col-md-6">
+                                  <input
+                                  id="bidhours"
+                                  type="number"
+                                  class="form-control"
+                                  name="password"
+                                  required
+                                  v-model="form.bidhours"
+                                   />
+                              </div>
+                            </div>
+                              </div>
+                              <div class="modal-footer">
+                              <button type="button"  v-on:click="setBidTime" class="btn btn-secondary" data-dismiss="modal">Set & Close</button>
+                                </div>
+                                </div>
+                              </div>
+                           </div>
                         </li>
                         <li>
                             <a class="sidebar-item d-flex justify-content-between align-items-center" href="/">
@@ -352,7 +420,6 @@
 <script>
 import { mapGetters } from 'vuex'
 import firebase from 'firebase'
-
 // const Mpesa = require('mpesa-api').Mpesa
 // const credentials = {
 //   clientKey: 'PzYKGrQDH8C75CkzOhn9QEUwNVuKAmpI',
@@ -368,6 +435,8 @@ export default {
     return {
       phoneNumber: '',
       email: '',
+      admin1: 'mccafeway@gmail.com',
+      admin2: 'philipnderitu40@gmail.com',
       balance: 0,
       maturedShares: '',
       invitelink: '',
@@ -378,11 +447,16 @@ export default {
       date: '',
       activated: null,
       messages: 0,
+      bidtime: 0,
+      timer: null,
+      invitees: [],
       inbox: [],
+      interval: null,
       form: {
         amount: 0,
         days: 0,
-        sharesOnSale: 0
+        sharesOnSale: 0,
+        bidhours: 0
       }
     }
   },
@@ -392,6 +466,10 @@ export default {
     console.log('updated')
     var db = firebase.firestore()
     var user = firebase.auth().currentUser
+    db.collection('timer').doc('timer').get().then(snapshot => {
+      let data = snapshot.data().interval
+      this.bidtime = data
+    })
     db.collection('users').doc(this.user.data.email).get().then(snapshot => {
       this.activated = snapshot.data().activated
     })
@@ -414,6 +492,11 @@ export default {
   },
   mounted: function () {
     var db = firebase.firestore()
+    db.collection('users').doc(this.user.data.email).collection('invitees').get().then(snapshot => {
+      snapshot.forEach(doc => {
+        this.invitees.push(doc.data())
+      })
+    })
     db.collection('users').doc(this.user.data.email).collection('messages').get().then(snapshot => {
       snapshot.forEach(doc => {
         this.inbox.push(doc.data())
@@ -424,60 +507,64 @@ export default {
     document.head.appendChild(externalScript)
   },
   methods: {
-    countdown: function () {
-      var countDownDate = new Date('Jan 5, 2022 15:37:25').getTime()
+    setMessagesToRead: function (email) {
+      var db = firebase.firestore()
+      db.collection('users').doc(email).collection('messages').get().then(snapshot => {
+        snapshot.forEach(doc => {
+          doc.data().read = true
+        })
+      })
+    },
+    countdown: function (to) {
+      var countDownDate = new Date()
+      countDownDate.setHours(countDownDate.getHours() + to)
       var x = setInterval(() => {
         var now = new Date().getTime()
         var distance = countDownDate - now
-
-        var days = Math.floor(distance / (1000 * 60 * 60 * 24))
         var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
         var seconds = Math.floor((distance % (1000 * 60)) / 1000)
-        document.getElementById('demo').innerHTML = days + 'd ' + hours + 'h' + minutes + 'm' + seconds + 's'
+        document.getElementById('timer').innerHTML = hours + 'h' + minutes + 'm' + seconds + 's'
         if (distance < 0) {
           clearInterval(x)
-          document.getElementById('demo').innerHTML = 'Expired'
+          document.getElementById('timer').innerHTML = 'Expired'
         }
       }, 1000)
     },
-    submit () {
-      var db2 = firebase.firestore()
-      var db = firebase.firestore().collection('shares').doc('available')
-      db.get().then(snapshot => {
-        let date = new Date()
-        console.log(date.getDate())
-        var data = snapshot.data()
-        if (data.total >= 0 && this.activated === true) {
-          let residue = data.total - this.form.amount
-          db2.collection('bids').add({
-            dob: Date(),
-            buyerid: this.phoneNumber,
-            buyeremail: this.user.data.email,
-            sellerid: '',
-            amount: this.form.amount,
-            status: 'pending',
-            paired: false,
-            period: this.form.days,
-            dop: '',
-            phone: this.phoneNumber,
-            transferdate: '',
-            sold: false
-          })
-          db2.collection('users').doc(this.user.data.email).collection('records').add({
-            amount: this.form.amount,
-            date: Date(),
-            party: this.user.data.email,
-            transactionType: 'bid'
-          })
-          console.log(residue)
-          db.update({total: residue})
-          this.$swal('you bought ' + '  ' + this.form.amount + '  ' + ' Pair to activate')
-          this.$router.push('/sharesdash')
-        } else {
-          this.$swal('Please activate your account')
-        }
+    setBidTime: function () {
+      alert('dksj')
+    },
+    SetBidder: function () {
+      var countdown = require('countdown-js')
+      var end = new Date()
+      end.setHours(end.getHours() + 6)
+      var timer = countdown.timer(end, function (timeleft) {
+        document.getElementById('timer').innerHTML = timeleft.hours + 'H:' + timeleft.minutes + 'M:' + timeleft.seconds
       })
+      return timer
+    },
+    submit () {
+      var db = firebase.firestore()
+      if (this.activated) {
+        db.collection('bids').add({
+          dob: Date(),
+          buyerid: this.phoneNumber,
+          buyeremail: this.user.data.email,
+          sellerid: '',
+          amount: this.form.amount,
+          status: 'pending',
+          paired: false,
+          period: this.form.days,
+          dop: '',
+          phone: this.phoneNumber,
+          transferdate: '',
+          sold: false
+        })
+        this.$swal('Bid  Placed Successfully')
+        this.$router.push('/sharesdash')
+      } else {
+        this.$swal('Activate your Account to bid')
+      }
     },
     Pay: function (event) {
       // mpesa.b2c({

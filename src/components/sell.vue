@@ -109,7 +109,6 @@ export default {
       var x = setInterval(() => {
         var now = new Date().getTime()
         var distance = countDownDate - now
-
         var days = Math.floor(distance / (1000 * 60 * 60 * 24))
         var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
@@ -128,6 +127,7 @@ export default {
       let maturedate = this.addDays(date, 2)
       if (this.form.transferamount <= this.sellerbal) {
         db.collection('users').doc(this.form.buyeremail).collection('messages').add({
+          message: 'Received Shares ',
           confirmed: 'yes',
           amount: this.form.transferamount,
           from: this.sellersphone
